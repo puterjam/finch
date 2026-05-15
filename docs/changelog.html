@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新日志 — Finch</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #2fa587;
+    --lime: #87d77a;
+    --cyan: #5fafc9;
+    --ivory: #f6f4ee;
+    --forest: #23312d;
+    --orange: #ff8a4c;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Georgia", "PingFang SC", serif;
+    background: var(--ivory);
+    color: var(--forest);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+  }
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .85rem;
+    color: rgba(35,49,45,.4);
+    margin-bottom: 48px;
+  }
+  .back:hover { color: var(--green); text-decoration: none; }
+
+  h1 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -.02em;
+  }
+
+  h1 + p {
+    color: rgba(35,49,45,.4);
+    font-size: .92rem;
+    margin-bottom: 56px;
+  }
+
+  .version {
+    margin-bottom: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(35,49,45,.06);
+  }
+
+  .version:last-child {
+    border-bottom: none;
+  }
+
+  .version h2 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .version .date {
+    font-size: .82rem;
+    color: rgba(35,49,45,.35);
+    margin-bottom: 28px;
+  }
+
+  .version h3 {
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--green);
+    margin-bottom: 12px;
+    font-family: -apple-system, sans-serif;
+  }
+
+  .version h3 + ul {
+    margin-bottom: 24px;
+  }
+
+  .version ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .version li {
+    font-size: .92rem;
+    color: rgba(35,49,45,.6);
+    line-height: 1.7;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .version li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    background: var(--lime);
+    border-radius: 50%;
+  }
+
+  .version li strong {
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 40px 20px 80px; }
+    h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back">&larr; 返回首页</a>
+
+<h1>更新日志</h1>
+<p>Finch 的每一次成长，都在这里记录。</p>
+
+<!-- ====== 1.1.0 ====== -->
+<div class="version">
+  <h2>1.1.0</h2>
+  <p class="date">2026-05-15</p>
+
+  <h3>新功能</h3>
+  <ul>
+    <li><strong>Mermaid 图表渲染</strong>：CodeBlock 支持 Mermaid 图表实时渲染，可在预览与源码间切换</li>
+    <li><strong>HTML 文件预览</strong>：HTML 文件改为 webview 渲染，支持真实页面预览而非展示源码</li>
+    <li><strong>附件持久化</strong>：附件文件现可跨会话持久化，会话视图同步改造</li>
+    <li><strong>工作目录侧栏折叠</strong>：WorkSidebar 工作目录分区支持折叠并记忆折叠状态</li>
+    <li><strong>Markdown 预览</strong>：CodeBlock 支持 Markdown 预览与原始内容切换</li>
+    <li><strong>HATCH 孵化流程</strong>：重写 HATCH 孵化流程，与 user-profile 完整联动</li>
+  </ul>
+
+  <h3>性能优化</h3>
+  <ul>
+    <li><strong>消除启动白屏</strong>：优化启动性能，消除应用启动时白屏闪烁</li>
+    <li><strong>webview 预加载</strong>：webview 在动画开始前提前加载，消除打开时的白屏</li>
+  </ul>
+
+  <h3>界面优化</h3>
+  <ul>
+    <li><strong>外观设置重设计</strong>：新增字体大小调节、主题分段控件，主目录卡片全面重设计</li>
+    <li><strong>设置窗口宽度限制</strong>：打开设置时强制窗口宽度不低于 960px，关闭后恢复限制</li>
+    <li><strong>设置页装饰图</strong>：设置页装饰图随窗口宽度自适应缩放</li>
+    <li><strong>首页提示文案</strong>：优化首页提示文案样式与目录按钮展示</li>
+    <li><strong>模型设置页面</strong>：优化模型设置页面交互细节</li>
+    <li><strong>侧栏交互</strong>：优化侧栏交互体验</li>
+  </ul>
+
+  <h3>Bug 修复</h3>
+  <ul>
+    <li><strong>历史会话继续对话</strong>：修复搬家后历史会话无法继续对话的问题</li>
+    <li><strong>推理底部指示器</strong>：修复推理中底部指示器抖动问题</li>
+    <li><strong>推理历史渲染</strong>：区分推理中断的历史渲染状态</li>
+    <li><strong>AskUserQuestion 文本长度</strong>：限制问题文本长度，避免提问过长</li>
+    <li><strong>设置关闭通知</strong>：改用 useEffect 清理函数触发 notifySettingsClose，修复时序问题</li>
+    <li><strong>会话输入与推理展示</strong>：优化会话输入与推理代码块展示</li>
+  </ul>
+
+  <h3>其他</h3>
+  <ul>
+    <li><strong>安全依赖升级</strong>：升级 Electron 与 Claude Agent SDK，修复 18 个 Dependabot 安全告警</li>
+    <li><strong>CN 服务商补充</strong>：补充各 CN 服务商 apiKeyUrl 并修正模型上下文长度</li>
+  </ul>
+</div>
+
+<!-- ====== 1.0.0 ====== -->
+<div class="version">
+  <h2>1.0.0</h2>
+  <p class="date">2026-05-14 · 首次发布</p>
+
+  <h3>核心功能</h3>
+  <ul>
+    <li>Claude Agent SDK 集成，支持多轮对话</li>
+    <li>会话创建、历史记录与恢复</li>
+    <li>工作目录管理与多目录切换</li>
+    <li>模型配置，支持多家 AI 服务商</li>
+    <li>设置弹窗与 IPC 通信架构</li>
+    <li>macOS DMG 安装包，支持 Retina 背景图与自动版本号同步</li>
+  </ul>
+</div>
+
+</body>
+</html>
