@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finch — 你的数字伙伴</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #2fa587;
+    --lime: #87d77a;
+    --cyan: #5fafc9;
+    --ivory: #f6f4ee;
+    --forest: #23312d;
+    --orange: #ff8a4c;
+    --green-light: #2fa58722;
+    --lime-light: #87d77a20;
+    --cyan-light: #5fafc918;
+    --orange-light: #ff8a4c18;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Georgia", "PingFang SC", "Georgia", serif;
+    background: var(--ivory);
+    color: var(--forest);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---- Shared ---- */
+  .serif { font-family: "Georgia", "PingFang SC", "Georgia", serif; }
+
+  section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---- Texture background ---- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2323312d' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 80px 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(47,165,135,.08) 0%, rgba(255,138,76,.04) 50%, transparent 72%);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
+    pointer-events: none;
+  }
+
+  .hero img {
+    width: 480px;
+    max-width: 85vw;
+    border-radius: 20px;
+    position: relative;
+    animation: heroIn 1s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(24px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .hero h1 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
+    font-weight: 700;
+    color: var(--forest);
+    margin-top: 48px;
+    letter-spacing: -.03em;
+    position: relative;
+    animation: fadeUp .8s .2s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .hero .tagline {
+    font-size: 1.15rem;
+    color: var(--green);
+    margin-top: 16px;
+    max-width: 490px;
+    position: relative;
+    font-weight: 400;
+    animation: fadeUp .8s .35s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .hero .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    font-size: .78rem;
+    color: rgba(35,49,45,.3);
+    letter-spacing: .08em;
+    animation: fadeUp .8s .6s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .hero .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: rgba(35,49,45,.15);
+    margin: 8px auto 0;
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: .3; transform: scaleY(1); }
+    50%      { opacity: .6; transform: scaleY(1.3); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- Flow section ---- */
+  .flow {
+    padding: 100px 32px;
+  }
+
+  .flow h2 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    color: var(--forest);
+  }
+
+  .flow .flow-subtitle {
+    text-align: center;
+    color: rgba(35,49,45,.45);
+    font-size: 1rem;
+    margin-bottom: 64px;
+  }
+
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px 64px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .flow-card {
+    position: relative;
+    opacity: 0;
+    animation: fadeUp .7s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .flow-card:nth-child(1) { animation-delay: .1s; }
+  .flow-card:nth-child(2) { animation-delay: .2s; }
+  .flow-card:nth-child(3) { animation-delay: .3s; }
+  .flow-card:nth-child(4) { animation-delay: .4s; }
+
+  .flow-card .card-label {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    font-family: -apple-system, sans-serif;
+  }
+
+  .flow-card h3 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--forest);
+  }
+
+  .flow-card p {
+    font-size: .92rem;
+    color: rgba(35,49,45,.55);
+    line-height: 1.7;
+  }
+
+  .flow-card img {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    transition: transform .4s cubic-bezier(.22,1,.36,1), opacity .4s;
+  }
+
+  .flow-card:hover img {
+    transform: translateY(-3px);
+    opacity: .92;
+  }
+
+  /* Card 4: text-only */
+  .flow-card.card-promise {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .flow-card.card-promise p {
+    color: rgba(35,49,45,.6);
+    font-size: .95rem;
+    line-height: 1.85;
+    max-width: 340px;
+  }
+
+  .flow-card.card-promise .promise-highlight {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 14px;
+    background: var(--orange-light);
+    color: var(--orange);
+    font-size: .85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    font-family: -apple-system, sans-serif;
+  }
+
+  /* ---- Story ---- */
+  .story {
+    padding: 80px 32px 60px;
+    text-align: center;
+  }
+
+  .story h2 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .story .story-desc {
+    color: rgba(35,49,45,.45);
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 56px;
+  }
+
+  .story-verse-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .verse {
+    text-align: center;
+    padding: 24px 12px;
+    border-radius: 16px;
+    transition: background .3s;
+  }
+
+  .verse:hover {
+    background: var(--green-light);
+  }
+
+  .verse-num {
+    font-family: "Georgia", serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .verse:nth-child(1) .verse-num { color: var(--green); }
+  .verse:nth-child(2) .verse-num { color: var(--cyan); }
+  .verse:nth-child(3) .verse-num { color: var(--orange); }
+
+  .verse h4 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--forest);
+  }
+
+  .verse p {
+    font-size: .88rem;
+    color: rgba(35,49,45,.5);
+    line-height: 1.7;
+  }
+
+  /* ---- CTA ---- */
+  .cta {
+    padding: 80px 32px 100px;
+    text-align: center;
+    position: relative;
+  }
+
+  .cta h2 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .cta .cta-desc {
+    color: rgba(35,49,45,.45);
+    font-size: .95rem;
+    margin-bottom: 32px;
+  }
+
+  .cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    background: var(--green);
+    color: #fff;
+    font-weight: 600;
+    font-size: .95rem;
+    border-radius: 12px;
+    transition: all .3s cubic-bezier(.22,1,.36,1);
+    text-decoration: none;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+
+  .cta .btn:hover {
+    background: #279077;
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .cta .btn::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--lime);
+    border-radius: 50%;
+  }
+
+  .cta .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    background: var(--forest);
+    color: var(--ivory);
+    font-weight: 600;
+    font-size: .95rem;
+    border-radius: 12px;
+    transition: all .3s cubic-bezier(.22,1,.36,1);
+    text-decoration: none;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    margin-left: 16px;
+  }
+
+  .cta .btn-download:hover {
+    background: #1a2620;
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .cta .btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    text-align: center;
+    padding: 40px 24px 56px;
+    font-size: .82rem;
+    color: rgba(35,49,45,.25);
+    font-family: "Georgia", serif;
+    letter-spacing: .02em;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 680px) {
+    .flow-grid { grid-template-columns: 1fr; gap: 40px; }
+    .story-verse-grid { grid-template-columns: 1fr; gap: 16px; }
+    .verse { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== Hero ========== -->
+<div class="hero">
+  <img src="images/welcome.png" alt="Finch 欢迎界面">
+  <h1 class="serif">Finch</h1>
+  <p class="tagline">一只停在你桌面上的小雀鸟，帮你衔来线索、织成脉络。</p>
+  <span class="scroll-hint">SCROLL</span>
+</div>
+
+<!-- ========== 三步引导 ========== -->
+<section class="flow">
+  <h2>三步开始，<em class="serif">和她聊聊</em></h2>
+  <p class="flow-subtitle">打开 Finch，她已经在等你了</p>
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <img src="images/build_home.png" alt="创建你的空间">
+      <span class="card-label">第一步</span>
+      <h3>给 Finch 安家</h3>
+      <p>起个昵称，这是你们认识的起点，她会记住你</p>
+    </div>
+
+    <div class="flow-card">
+      <img src="images/choose_ai.png" alt="选择 AI 模型">
+      <span class="card-label">第二步</span>
+      <h3>择羽衣</h3>
+      <p>第三方接入或本地部署，配置好模型，她就能开口了</p>
+    </div>
+
+    <div class="flow-card">
+      <img src="images/go_home.png" alt="进入你的空间">
+      <span class="card-label">第三步</span>
+      <h3>进入 Finch 的小窝</h3>
+      <p>她已经开始行动了 — 孵化任务、建立档案，默默为你做着准备</p>
+    </div>
+
+    <div class="flow-card card-promise">
+      <p>从这里开始，每次打开 Finch，你都回到同一个地方。她记得上一次你们聊到哪，也记得你交代过什么</p>
+      <span class="promise-highlight">不需要重新介绍自己</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta">
+  <h2>和 Finch 聊聊吧</h2>
+  <p class="cta-desc">macOS 桌面应用</p>
+  <a href="https://github.com/puterjam/finch/releases" class="btn-download">下载 Finch</a>
+</section>
+
+<!-- ========== 小雀鸟的故事 ========== -->
+<section class="story">
+  <h2 class="serif">为什么是一只雀鸟</h2>
+  <p class="story-desc">因为好的陪伴应该像鸟一样 — 不沉重，不喧嚣，该出现时落在手边，该忙碌时飞向远方</p>
+
+  <div class="story-verse-grid">
+    <div class="verse">
+      <div class="verse-num serif">I</div>
+      <h4>衔来线索</h4>
+      <p>散落各处的信息碎片，她帮你整理串联，织成脉络</p>
+    </div>
+    <div class="verse">
+      <div class="verse-num serif">II</div>
+      <h4>振翅连接</h4>
+      <p>穿梭在你的项目和工具之间，轻盈进入你的工作现场</p>
+    </div>
+    <div class="verse">
+      <div class="verse-num serif">III</div>
+      <h4>守巢执行</h4>
+      <p>交代的事情稳步跟进，不催促，也不遗忘</p>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center; padding: 40px 32px;">
+  <a href="https://github.com/puterjam/finch/blob/master/CHANGELOG.md" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">查看更新日志</a>
+</div>
+
+<footer>Finch — 用最自然的方式使用 AI</footer>
+
+</body>
+</html>
