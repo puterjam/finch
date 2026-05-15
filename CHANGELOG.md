@@ -44,7 +44,7 @@
 
 ### 其他
 
-- **安全依赖升级**：升级 Electron 与 Claude Agent SDK，修复 18 个 Dependabot 安全告警
+- **安全依赖升级**：升级 Electron，修复 18 个 Dependabot 安全告警
 - **CN 服务商补充**：补充各 CN 服务商 `apiKeyUrl` 并修正模型上下文长度
 - **运行时数据文档**：记录运行时数据和 session 存储位置在 `~/.finch`
 
@@ -55,8 +55,7 @@
 ### 核心功能
 
 - Electron + React + TypeScript 桌面应用
-- Claude Agent SDK 集成，支持多轮对话
-- 会话创建、历史记录与恢复
+- AI 多轮对话与智能推理
 - 工作目录管理与多目录切换
 - 模型配置，支持多家 AI 服务商
 - 设置弹窗与 IPC 通信架构
