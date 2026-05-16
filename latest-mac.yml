@@ -1,8 +1,8 @@
-version: 1.1.0
+version: 1.2.0
 files:
-  - url: Finch-1.1.0-arm64.dmg
-    sha512: ikw2CN7hyKpzzaizjoUXLrwXsWff+AnKQzKLdgKLPL6zSeGR7EMkiCS0OgL0R5OI4l+IK/EZQCt3hRtTI5MI2g==
-    size: 245988510
-path: Finch-1.1.0-arm64.dmg
-sha512: ikw2CN7hyKpzzaizjoUXLrwXsWff+AnKQzKLdgKLPL6zSeGR7EMkiCS0OgL0R5OI4l+IK/EZQCt3hRtTI5MI2g==
-releaseDate: '2026-05-15T10:43:10.342Z'
+  - url: Finch-1.2.0-arm64.dmg
+    sha512: rShie8FlXdrNG8cNjaIlfTYnnLRjBP4v6gBPoU/jLKH6EO2SE+gNkX2NRJOuyN8Z8pkOl3Y9EpYOPPxjQYym4w==
+    size: 237161484
+path: Finch-1.2.0-arm64.dmg
+sha512: rShie8FlXdrNG8cNjaIlfTYnnLRjBP4v6gBPoU/jLKH6EO2SE+gNkX2NRJOuyN8Z8pkOl3Y9EpYOPPxjQYym4w==
+releaseDate: '2026-05-16T11:18:06.067Z'

@@ -138,6 +138,40 @@
 <h1>更新日志</h1>
 <p>Finch 的每一次成长，都在这里记录。</p>
 
+<!-- ====== 1.2.0 ====== -->
+<div class="version">
+  <h2>1.2.0</h2>
+  <p class="date">2026-05-16</p>
+
+  <h3>新增</h3>
+  <ul>
+    <li><strong>在线自动更新</strong>：接入 electron-updater，启动后静默检查 GitHub Release，发现新版本后台自动下载，用户决定何时重启安装</li>
+    <li><strong>首页更新提示气泡</strong>：首页右上角实时显示更新状态（发现新版本 / 下载进度 / 点击重启安装），品牌绿配色</li>
+    <li><strong>预发布通道</strong>：设置 → 关于 新增"接收预发布版本"开关，可提前体验 beta 版本</li>
+    <li><strong>身份文件快照</strong>：重新孵化或覆盖前，身份文件自动备份至 ~/.finch/snapshots/，保留最近 20 份</li>
+    <li><strong>智谱 GLM Code Plan</strong>：新增内置供应商，支持 GLM-5.1 / GLM-4.7 / GLM-4.5-Air，200k 上下文</li>
+    <li><strong>工作区面板初始扫描</strong>：新建会话时自动扫描当前目录并展示文件结构，不再显示空白面板</li>
+    <li><strong>工具调用动画</strong>：运行中的工具调用显示限流滚动动画，超长路径自动截断美化展示</li>
+  </ul>
+
+  <h3>优化</h3>
+  <ul>
+    <li><strong>启动速度</strong>：冷启动白屏时间大幅缩短，webview 提前预加载，打开时不再闪白屏</li>
+    <li><strong>包体积</strong>：PNG 资源全量压缩，安装包体积减少约 81%</li>
+    <li><strong>Context Window 统计</strong>：改用 assistant 消息级别 usage 计算，避免数值虚高</li>
+    <li><strong>更新状态管理</strong>：更新逻辑抽离为独立 updateStore，后台每 4 小时自动检查，错误提示中文化</li>
+    <li><strong>会话列表排序</strong>：过滤 SDK metadata 行 mtime 干扰，排序结果稳定不跳动</li>
+  </ul>
+
+  <h3>Bug 修复</h3>
+  <ul>
+    <li><strong>backdrop-filter 失效</strong>：修复打包后 blur 特效失效的问题（browserslist 配置导致）</li>
+    <li><strong>AskUserQuestion 选项截断</strong>：移除 description 副标题展示，label 保证完整可读</li>
+    <li><strong>工作区面板</strong>：修复新建会话后面板显示为空、滚动区域、分组展示三处异常</li>
+    <li><strong>重新孵化后引导语</strong>：修复重新孵化后首页未自动填入引导语的问题</li>
+  </ul>
+</div>
+
 <!-- ====== 1.1.0 ====== -->
 <div class="version">
   <h2>1.1.0</h2>
