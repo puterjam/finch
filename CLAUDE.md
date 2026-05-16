@@ -77,3 +77,23 @@ git ls-remote --heads origin
 ## Auto-Update Mechanism
 
 The Finch app checks `latest-mac.yml` from GitHub Releases on startup. If a newer version is detected, it prompts the user to download the DMG asset referenced in the `url` field. Therefore, after uploading a new DMG, ensure `latest-mac.yml` is synced with the correct asset URL and hash.
+
+## CloudBase Static Hosting
+
+The `docs/` directory is deployed to CloudBase static hosting (environment `finch`, EnvId: `finch-d2gx2j6h43e6b2239`).
+
+**Access URL:** https://finch-d2gx2j6h43e6b2239-1251008045.tcloudbaseapp.com/
+
+### Deploy docs to CloudBase
+
+After updating files in `docs/`, redeploy via CloudBase MCP (requires `.mcp.json` to be configured and Claude Code restarted):
+
+```
+manageHosting(action="upload", localPath="./docs", cloudPath="/", ignore=[".DS_Store", "**/.DS_Store"])
+```
+
+Or via CLI (requires `@cloudbase/cli`):
+
+```bash
+tcb hosting deploy docs / -e finch-d2gx2j6h43e6b2239
+```
