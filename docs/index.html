@@ -52,6 +52,129 @@
     z-index: -1;
   }
 
+  /* ---- Micro particles ---- */
+  .particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .particles span {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .particles span:nth-child(1) {
+    width: 8px; height: 8px;
+    background: var(--green);
+    opacity: .04;
+    top: 18%; left: 12%;
+    animation: drift1 24s ease-in-out infinite;
+  }
+  .particles span:nth-child(2) {
+    width: 6px; height: 6px;
+    background: var(--orange);
+    opacity: .035;
+    top: 55%; left: 78%;
+    animation: drift2 28s ease-in-out infinite;
+  }
+  .particles span:nth-child(3) {
+    width: 10px; height: 10px;
+    background: var(--cyan);
+    opacity: .03;
+    top: 35%; left: 45%;
+    animation: drift3 22s ease-in-out infinite;
+  }
+  .particles span:nth-child(4) {
+    width: 7px; height: 7px;
+    background: var(--lime);
+    opacity: .04;
+    top: 72%; left: 25%;
+    animation: drift4 26s ease-in-out infinite;
+  }
+  .particles span:nth-child(5) {
+    width: 5px; height: 5px;
+    background: var(--green);
+    opacity: .035;
+    top: 85%; left: 65%;
+    animation: drift5 30s ease-in-out infinite;
+  }
+
+  @keyframes drift1 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(60px, 40px); }
+    50%      { transform: translate(20px, 80px); }
+    75%      { transform: translate(-40px, 30px); }
+  }
+  @keyframes drift2 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-50px, -30px); }
+    50%      { transform: translate(-20px, 50px); }
+    75%      { transform: translate(40px, -20px); }
+  }
+  @keyframes drift3 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-30px, 60px); }
+    50%      { transform: translate(50px, 20px); }
+    75%      { transform: translate(10px, -40px); }
+  }
+  @keyframes drift4 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(40px, -50px); }
+    50%      { transform: translate(-30px, -20px); }
+    75%      { transform: translate(-60px, 30px); }
+  }
+  @keyframes drift5 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-40px, 40px); }
+    50%      { transform: translate(30px, -30px); }
+    75%      { transform: translate(50px, 10px); }
+  }
+
+  /* ---- Breathing color blocks ---- */
+  .flow, .showcase, .cta, .story { position: relative; }
+  .flow::before, .showcase::before, .cta::before, .story::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: breathe 7s ease-in-out infinite;
+  }
+
+  .flow::before {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(47,165,135,.06), transparent 70%);
+    top: -100px; left: -150px;
+  }
+
+  .showcase::before {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(95,175,201,.05), transparent 70%);
+    top: -80px; right: -100px;
+    animation-delay: 1.5s;
+  }
+
+  .cta::before {
+    width: 450px; height: 450px;
+    background: radial-gradient(circle, rgba(255,138,76,.05), transparent 70%);
+    bottom: -60px; left: -120px;
+    animation-delay: 3s;
+  }
+
+  .story::before {
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(135,215,122,.05), transparent 70%);
+    top: -80px; right: -140px;
+    animation-delay: 4.5s;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: .3; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.05); }
+  }
+
   /* ---- Hero ---- */
   .hero {
     display: flex;
@@ -445,6 +568,9 @@
 </style>
 </head>
 <body>
+
+<!-- Particles -->
+<div class="particles"><span></span><span></span><span></span><span></span><span></span></div>
 
 <!-- ========== Hero ========== -->
 <div class="hero">
