@@ -32,4 +32,4 @@ Finch 以 macOS 桌面应用形式发布。
 
 ---
 
-*Finch — 用最自然的方式使用 AI*
+*Finch — 以自然的方式使用 AI*

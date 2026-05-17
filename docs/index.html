@@ -531,7 +531,6 @@
     transition: all .3s cubic-bezier(.22,1,.36,1);
     text-decoration: none;
     font-family: -apple-system, "PingFang SC", sans-serif;
-    margin-left: 16px;
   }
 
   .cta .btn-download:hover {
@@ -624,8 +623,11 @@
 <!-- ========== CTA ========== -->
 <section class="cta">
   <h2>和 Finch 聊聊吧</h2>
-  <p class="cta-desc">macOS 桌面应用 <span id="latest-version"></span></p>
-  <a id="download-btn" href="https://github.com/puterjam/finch/releases" class="btn-download">下载 Finch</a>
+  <p class="cta-desc">macOS 桌面应用 · v1.2.1</p>
+  <div class="btn-group">
+    <a href="https://github.com/puterjam/finch/releases/download/v1.2.1/Finch-1.2.1-arm64.dmg" class="btn-download">下载 Mac Apple Silicon</a>
+    <a href="https://github.com/puterjam/finch/releases/download/v1.2.1/Finch-1.2.1.dmg" class="btn-download">下载 Mac 通用版</a>
+  </div>
 </section>
 
 <!-- ========== 小雀鸟的故事 ========== -->
@@ -658,20 +660,8 @@
   <a href="https://github.com/puterjam/finch/issues" target="_blank" rel="noopener" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">问题反馈</a>
 </div>
 
-<footer>Finch — 用最自然的方式使用 AI</footer>
+<footer>Finch — 以自然的方式使用 AI</footer>
 
-<script>
-fetch('https://api.github.com/repos/puterjam/finch/releases/latest')
-  .then(r => r.json())
-  .then(data => {
-    const dmg = data.assets.find(a => a.name.endsWith('.dmg'));
-    if (dmg) {
-      document.getElementById('download-btn').href = dmg.browser_download_url;
-    }
-    document.getElementById('latest-version').textContent = data.tag_name;
-  })
-  .catch(() => {});
-</script>
 
 </body>
 </html>
