@@ -541,10 +541,23 @@
 
   .cta .btn-group {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
+  }
+
+  .cta .btn-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cta .btn-hint {
+    font-size: .75rem;
+    color: rgba(35,49,45,.35);
+    font-family: -apple-system, "PingFang SC", sans-serif;
   }
 
   /* ---- Footer ---- */
@@ -625,8 +638,14 @@
   <h2>和 Finch 聊聊吧</h2>
   <p class="cta-desc">macOS 桌面应用 · v1.2.1</p>
   <div class="btn-group">
-    <a href="https://github.com/puterjam/finch/releases/download/v1.2.1/Finch-1.2.1-arm64.dmg" class="btn-download">下载 Mac Apple Silicon</a>
-    <a href="https://github.com/puterjam/finch/releases/download/v1.2.1/Finch-1.2.1.dmg" class="btn-download">下载 Mac 通用版</a>
+    <div class="btn-wrap">
+      <a href="https://github.com/puterjam/finch/releases/download/v1.2.1/Finch-1.2.1-arm64.dmg" class="btn-download">下载 Mac ARM64 版</a>
+      <span class="btn-hint">适合搭载 M 系列芯片的 Mac</span>
+    </div>
+    <div class="btn-wrap">
+      <a href="https://github.com/puterjam/finch/releases/download/v1.2.1/Finch-1.2.1.dmg" class="btn-download">下载 Mac 通用版</a>
+      <span class="btn-hint">适合搭载 Intel 芯片的 Mac</span>
+    </div>
   </div>
 </section>
 
