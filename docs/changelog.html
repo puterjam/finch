@@ -138,6 +138,46 @@
 <h1>更新日志</h1>
 <p>Finch 的每一次成长，都在这里记录。</p>
 
+<!-- ====== 1.3.0 ====== -->
+<div class="version">
+  <h2>1.3.0</h2>
+  <p class="date">2026-05-21</p>
+
+  <h3>新增</h3>
+  <ul>
+    <li><strong>完整记忆系统（测试版）</strong>：会话结束时自动蒸馏对话为事实，分类写入身份与记忆文件，支持信任评分与低分归档</li>
+    <li><strong>MCP 应用桥接</strong>：通过 AI 交互管理空间、调整外观设置、查询版本与执行应用升级</li>
+    <li><strong>空间路由与工作目录</strong>：空间可关联本地目录，目录空间与普通空间区分展示</li>
+    <li><strong>会话自动命名</strong>：AI 根据对话内容自动生成会话标题</li>
+    <li><strong>对话压缩状态提示</strong>：上下文自动压缩时显示压缩中动画与完成标记</li>
+    <li><strong>设置页增强</strong>：新增辅助模型选择、记忆模式配置与统计面板</li>
+    <li><strong>工作区交互优化</strong>：文件名超长截断、规则文件图标与点击定位</li>
+    <li><strong>日志分组展示</strong>：最近 7 条日志，超出引导查看完整目录</li>
+    <li><strong>右侧工具栏重构</strong>：支持 docked / floating 双模式</li>
+  </ul>
+
+  <h3>优化</h3>
+  <ul>
+    <li><strong>渲染性能大幅提升</strong>：滚动容器、静态消息、代码块全面启用合成层优化</li>
+    <li><strong>SyntaxHighlighter 懒加载</strong>：流式输出跳过高亮，完成后渲染，降低实时 CPU 占用</li>
+    <li><strong>推理实时统计</strong>：cache 和输出 token 在推理过程中实时更新</li>
+    <li><strong>记忆搜索改进</strong>：搜索日志文件而非已注入内容，结果按日期排序</li>
+    <li><strong>侧栏视觉统一</strong>：分区标题置顶，修复缩窄时换行与 icon 消失</li>
+    <li><strong>更新通知重做</strong>：全局固定显示，进度条与按钮更醒目</li>
+  </ul>
+
+  <h3>Bug 修复</h3>
+  <ul>
+    <li>修复切换会话时 Composer 模型选择不更新</li>
+    <li>修复键盘导航跳过空间会话</li>
+    <li>修复 Composer 输入框在页面挤压时不增高</li>
+    <li>过滤 task-notification 防止内部事件泄漏到界面</li>
+    <li>修复空间目录路径未规范化导致去重失败</li>
+    <li>修复多 provider token 计数合并逻辑</li>
+    <li>修复 x64 交叉编译包内缺少 native binary 的问题</li>
+  </ul>
+</div>
+
 <!-- ====== 1.2.1 ====== -->
 <div class="version">
   <h2>1.2.1</h2>
