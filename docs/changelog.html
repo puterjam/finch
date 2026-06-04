@@ -138,6 +138,30 @@
 <h1>更新日志</h1>
 <p>Finch 的每一次成长，都在这里记录。</p>
 
+<!-- ====== 1.4.2 ====== -->
+<div class="version">
+  <h2>1.4.2</h2>
+  <p class="date">2026-06-04</p>
+
+  <h3>新增</h3>
+  <ul>
+    <li><strong>Windows 官方支持</strong>：新增 Windows x64 / ia32 安装包下载，官网可直接获取对应版本</li>
+    <li><strong>多窗口升级</strong>：支持多窗口 URI 智能路由，流事件可广播给所有正在查看同一会话的窗口</li>
+    <li><strong>finch:// 深链接</strong>：支持通过 URI Scheme 直接跳转到指定会话</li>
+    <li><strong>用量统计重构</strong>：用量统计与设置页统一布局，支持缓存与骨架屏，查看更稳定</li>
+    <li><strong>Grep / Edit 工具优化</strong>：Grep 支持更多输出控制参数，Edit 增加读前写保护</li>
+  </ul>
+
+  <h3>优化</h3>
+  <ul>
+    <li><strong>全平台兼容性提升</strong>：修复 Windows / Linux 下的标题栏、快捷键、路径与窗口外壳问题</li>
+    <li><strong>rg 解析策略重做</strong>：优先使用 Finch 自带 ripgrep，缺失时自动补齐并回退系统工具</li>
+    <li><strong>字体本地化</strong>：移除 Google Fonts CDN 依赖，改为内置托管</li>
+    <li><strong>记忆系统更稳健</strong>：超容量时自动淘汰归档，不再直接报错</li>
+    <li><strong>模型排序优化</strong>：供应商与内置模型排序更清晰，自定义模型识别更准确</li>
+  </ul>
+</div>
+
 <!-- ====== 1.4.1 ====== -->
 <div class="version">
   <h2>1.4.1</h2>
