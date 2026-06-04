@@ -541,23 +541,108 @@
 
   .cta .btn-group {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
   }
 
   .cta .btn-wrap {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 8px;
+  }
+
+  .cta .btn-wrap.recommended {
+    display: flex;
   }
 
   .cta .btn-hint {
     font-size: .75rem;
     color: rgba(35,49,45,.35);
     font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+
+  .cta .recommend-tag {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -2px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(47,165,135,.12);
+    color: var(--green);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+
+  .cta .btn-wrap.recommended .recommend-tag {
+    display: inline-flex;
+  }
+
+  .cta .btn-wrap.recommended .btn-download {
+    background: linear-gradient(135deg, #23312d 0%, #2b4039 100%);
+    box-shadow: 0 16px 30px rgba(35,49,45,.14);
+  }
+
+  .cta .btn-wrap.recommended .btn-download:hover {
+    background: linear-gradient(135deg, #1a2620 0%, #23312d 100%);
+  }
+
+  .cta .btn-download.btn-disabled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: not-allowed;
+    background: rgba(35,49,45,.28);
+    color: rgba(246,244,238,.86);
+    box-shadow: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .cta .btn-download.btn-disabled:hover {
+    background: rgba(35,49,45,.28);
+    transform: none;
+  }
+
+  .cta .unsupported-panel {
+    display: none;
+    margin-top: 10px;
+    text-align: center;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+
+  .cta .unsupported-panel.show {
+    display: block;
+  }
+
+  .cta .unsupported-note {
+    margin-top: 10px;
+    color: rgba(35,49,45,.62);
+    font-size: .92rem;
+  }
+
+  .cta .all-downloads {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .cta .all-downloads a {
+    color: rgba(35,49,45,.52);
+    font-size: .88rem;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(35,49,45,.18);
+    padding-bottom: 2px;
+    transition: color .2s ease, border-color .2s ease;
+  }
+
+  .cta .all-downloads a:hover {
+    color: var(--green);
+    border-color: var(--green);
   }
 
   /* ---- Footer ---- */
@@ -638,22 +723,33 @@
   <h2>和 Finch 聊聊吧</h2>
   <p class="cta-desc">桌面应用 · v1.4.2</p>
   <div class="btn-group">
-    <div class="btn-wrap">
-      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-arm64.dmg" class="btn-download">下载 Mac ARM64 版</a>
+    <div class="btn-wrap" data-platform="mac-arm" data-download-label="下载 Mac ARM64 版">
+      <span class="recommend-tag">推荐下载</span>
+      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-arm64.dmg" class="btn-download">下载</a>
       <span class="btn-hint">适合搭载 M 系列芯片的 Mac</span>
     </div>
-    <div class="btn-wrap">
-      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-x64.dmg" class="btn-download">下载 Mac 通用版</a>
+    <div class="btn-wrap" data-platform="mac-intel" data-download-label="下载 Mac Intel 通用版">
+      <span class="recommend-tag">推荐下载</span>
+      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-x64.dmg" class="btn-download">下载</a>
       <span class="btn-hint">适合搭载 Intel 芯片的 Mac</span>
     </div>
-    <div class="btn-wrap">
-      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-setup-x64.exe" class="btn-download">下载 Windows 64 位版</a>
+    <div class="btn-wrap" data-platform="win-x64" data-download-label="下载 Windows x64 版">
+      <span class="recommend-tag">推荐下载</span>
+      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-setup-x64.exe" class="btn-download">下载</a>
       <span class="btn-hint">适合 64 位 Windows 电脑</span>
     </div>
-    <div class="btn-wrap">
-      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-setup-ia32.exe" class="btn-download">下载 Windows 32 位版</a>
+    <div class="btn-wrap" data-platform="win-ia32" data-download-label="下载 Windows ia32 版">
+      <span class="recommend-tag">推荐下载</span>
+      <a href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-setup-ia32.exe" class="btn-download">下载</a>
       <span class="btn-hint">适合较旧的 32 位 Windows 电脑</span>
     </div>
+  </div>
+  <div class="unsupported-panel" id="download-unsupported">
+    <span class="btn-download btn-disabled">下载</span>
+    <div class="unsupported-note">当前系统暂未支持</div>
+  </div>
+  <div class="all-downloads">
+    <a href="downloads.html">查看全部支持的系统版本</a>
   </div>
 </section>
 
@@ -689,6 +785,65 @@
 
 <footer>Finch — 以自然的方式使用 AI</footer>
 
+<script>
+(() => {
+  const wraps = Array.from(document.querySelectorAll('.cta .btn-wrap'));
+  const byPlatform = new Map(wraps.map((wrap) => [wrap.dataset.platform, wrap]));
+
+  const ua = navigator.userAgent || '';
+  const navPlatform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+  const maxTouchPoints = navigator.maxTouchPoints || 0;
+
+  const state = {
+    platform: navPlatform.toLowerCase(),
+    ua: ua.toLowerCase(),
+    architecture: '',
+    bitness: '',
+  };
+
+  const pick = async () => {
+    if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+      try {
+        const data = await navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness', 'platform']);
+        state.platform = String(data.platform || state.platform).toLowerCase();
+        state.architecture = String(data.architecture || '').toLowerCase();
+        state.bitness = String(data.bitness || '').toLowerCase();
+      } catch {
+        // ignore
+      }
+    }
+
+    let target = '';
+
+    if (state.platform.includes('mac') || state.ua.includes('mac os x')) {
+      const looksArm = state.architecture.includes('arm') || /arm|aarch64|apple/.test(state.ua) || (state.platform.includes('macintel') && maxTouchPoints > 1);
+      target = looksArm ? 'mac-arm' : 'mac-intel';
+    } else if (state.platform.includes('win') || state.ua.includes('windows')) {
+      const is32 = state.bitness === '32' || (/wow64|win32/.test(state.ua) && !/x64|amd64|wow64/.test(state.ua));
+      target = is32 ? 'win-ia32' : 'win-x64';
+    }
+
+    wraps.forEach((wrap) => wrap.classList.remove('recommended'));
+    const unsupported = document.getElementById('download-unsupported');
+
+    if (!target) {
+      if (unsupported) unsupported.classList.add('show');
+      return;
+    }
+
+    if (unsupported) unsupported.classList.remove('show');
+    const selected = byPlatform.get(target);
+    if (selected) {
+      selected.classList.add('recommended');
+      const btn = selected.querySelector('.btn-download');
+      const label = selected.dataset.downloadLabel;
+      if (btn && label) btn.textContent = label;
+    }
+  };
+
+  void pick();
+})();
+</script>
 
 </body>
 </html>

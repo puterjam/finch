@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<title>支持系统版本 — Finch</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --green: #2fa587;
+    --lime: #87d77a;
+    --ivory: #f6f4ee;
+    --forest: #23312d;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Georgia", "PingFang SC", serif;
+    background: var(--ivory);
+    color: var(--forest);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .86rem;
+    color: rgba(35,49,45,.42);
+    margin-bottom: 40px;
+  }
+  .back:hover { color: var(--green); text-decoration: none; }
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -.03em;
+    margin-bottom: 10px;
+  }
+  .lead {
+    color: rgba(35,49,45,.42);
+    margin-bottom: 36px;
+  }
+  .note {
+    margin-bottom: 28px;
+    padding: 16px 18px;
+    border: 1px solid rgba(35,49,45,.08);
+    border-radius: 16px;
+    background: rgba(255,255,255,.36);
+    color: rgba(35,49,45,.72);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .card {
+    padding: 22px 22px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(35,49,45,.08);
+    background: rgba(255,255,255,.48);
+    box-shadow: 0 12px 28px rgba(35,49,45,.04);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(47,165,135,.1);
+    color: var(--green);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    margin-bottom: 12px;
+  }
+  .card h2 {
+    font-size: 1.28rem;
+    margin-bottom: 6px;
+  }
+  .meta {
+    color: rgba(35,49,45,.46);
+    font-size: .92rem;
+    margin-bottom: 16px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--forest);
+    color: var(--ivory);
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .btn:hover {
+    background: #1a2620;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  .footer {
+    margin-top: 42px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(35,49,45,.08);
+    color: rgba(35,49,45,.46);
+    font-size: .92rem;
+  }
+  @media (max-width: 700px) {
+    body { padding: 36px 20px 80px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back">&larr; 返回首页</a>
+<h1>支持的系统版本</h1>
+<p class="lead">如果首页识别不准，可以来这里手动选择。</p>
+
+<div class="note">
+  目前 Finch 提供 macOS 与 Windows 下载：Mac 分 ARM64 / Intel 两种，Windows 分 64 位 / 32 位两种。
+</div>
+
+<div class="grid">
+  <div class="card">
+    <span class="badge">macOS</span>
+    <h2>ARM64 版</h2>
+    <div class="meta">适合 Apple Silicon / M 系列芯片</div>
+    <a class="btn" href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-arm64.dmg">下载</a>
+  </div>
+
+  <div class="card">
+    <span class="badge">macOS</span>
+    <h2>Intel 通用版</h2>
+    <div class="meta">适合 Intel 芯片的 Mac</div>
+    <a class="btn" href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-x64.dmg">下载</a>
+  </div>
+
+  <div class="card">
+    <span class="badge">Windows</span>
+    <h2>64 位版</h2>
+    <div class="meta">适合绝大多数现代 Windows 电脑</div>
+    <a class="btn" href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-setup-x64.exe">下载</a>
+  </div>
+
+  <div class="card">
+    <span class="badge">Windows</span>
+    <h2>32 位版</h2>
+    <div class="meta">适合较旧的 32 位 Windows 电脑</div>
+    <a class="btn" href="https://github.com/puterjam/finch/releases/download/v1.4.2/Finch-1.4.2-setup-ia32.exe">下载</a>
+  </div>
+</div>
+
+<div class="footer">
+  首页会根据你的设备自动推荐最合适的下载；如果你想看最新更新，也可以回到 <a href="changelog.html">更新日志</a>。
+</div>
+
+</body>
+</html>
