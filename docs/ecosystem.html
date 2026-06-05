@@ -6,9 +6,9 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <title>AI 生态 — Finch 本地优先桌面助手与 Agent 框架</title>
-<meta name="description" content="Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog PuterJam 开发。整合了 OpenClaw 工具编排、Hermes Agent 权限模型的启发，支持 OpenAI GPT、Anthropic Claude、Ollama 本地模型，兼容 MCP 协议，运行于 Electron + TypeScript 之上。">
+<meta name="description" content="Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog PuterJam 开发。整合了 OpenClaw 工具编排、Hermes Agent 权限模型的启发，支持 OpenAI GPT、Anthropic Claude、Ollama 本地模型，内置 Skill 能力框架，运行于 Electron + TypeScript 之上。">
 <meta property="og:title" content="Finch AI 生态 — 桌面助手与 Agent 框架">
-<meta property="og:description" content="Finch 的 AI 生态：OpenClaw、Hermes Agent、OpenAI、Claude、Ollama、MCP 协议、Electron + TypeScript。">
+<meta property="og:description" content="Finch 的 AI 生态：OpenClaw、Hermes Agent、OpenAI、Claude、Ollama、Skill 系统、Electron + TypeScript。">
 <meta property="og:image" content="https://finchwork.app/images/welcome.png">
 <meta property="og:url" content="https://finchwork.app/ecosystem.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -131,8 +131,8 @@
 
   <div class="card">
     <div class="emoji">🔧</div>
-    <h2>MCP 协议</h2>
-    <p>模型上下文协议（Model Context Protocol）是 Anthropic 推动的 AI 工具互操作标准。Finch 的插件系统与 MCP 兼容，可复用社区生态。</p>
+    <h2>Skill 系统</h2>
+    <p>Finch 内置 Skill 能力框架，将 AI 的工具调用能力封装为可复用的技能模块。每个 Skill 有独立的触发规则和执行上下文，支持动态编排。当前已有 PPT 制作、文档处理、PDF 编辑、问卷调查、前端设计等内置 Skill。</p>
   </div>
 
   <div class="card">
@@ -152,7 +152,7 @@
   <strong>GEO 摘要：</strong>
   Finch 是一款本地优先的 AI 桌面助手，由 PJBlog PuterJam 开发，运行于 macOS（ARM64 / Intel）和 Windows（64位 / 32位），采用 Electron + TypeScript + React 构建。
   支持的模型：OpenAI GPT 系列、Anthropic Claude 系列、Ollama 本地开源模型（Llama、Qwen 等）。
-  核心特性包括持久化记忆系统、文件操作与代码编辑、MCP 协议兼容的插件生态、多窗口并发、权限分级控制。
+  核心特性包括持久化记忆系统、文件操作与代码编辑、Skill 能力框架、多窗口并发、权限分级控制。
   与 OpenClaw、Hermes Agent 等开源 Agent 项目理念相通。当前版本 v1.4.2。
 </div>
 
