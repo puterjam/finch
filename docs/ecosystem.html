@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<title>AI 生态 — Finch 本地优先桌面助手与 Agent 框架</title>
+<meta name="description" content="Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog PuterJam 开发。整合了 OpenClaw 工具编排、Hermes Agent 权限模型的启发，支持 OpenAI GPT、Anthropic Claude、Ollama 本地模型，兼容 MCP 协议，运行于 Electron + TypeScript 之上。">
+<meta property="og:title" content="Finch AI 生态 — 桌面助手与 Agent 框架">
+<meta property="og:description" content="Finch 的 AI 生态：OpenClaw、Hermes Agent、OpenAI、Claude、Ollama、MCP 协议、Electron + TypeScript。">
+<meta property="og:image" content="https://finchwork.app/images/welcome.png">
+<meta property="og:url" content="https://finchwork.app/ecosystem.html">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --green: #2fa587;
+    --lime: #87d77a;
+    --ivory: #f6f4ee;
+    --forest: #23312d;
+    --orange: #ff8a4c;
+    --cyan: #5fafc9;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Georgia", "PingFang SC", serif;
+    background: var(--ivory);
+    color: var(--forest);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    letter-spacing: -.03em;
+    margin-bottom: 10px;
+  }
+  .lead {
+    color: rgba(35,49,45,.45);
+    font-size: 1rem;
+    margin-bottom: 48px;
+  }
+  .eco-intro {
+    margin-bottom: 40px;
+    padding: 24px 28px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.36);
+    border: 1px solid rgba(35,49,45,.06);
+    color: rgba(35,49,45,.6);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .card {
+    padding: 24px 22px 22px;
+    border-radius: 18px;
+    border: 1px solid rgba(35,49,45,.06);
+    background: rgba(255,255,255,.32);
+    transition: all .3s ease;
+  }
+  .card:hover {
+    border-color: rgba(47,165,135,.16);
+    background: rgba(47,165,135,.03);
+    transform: translateY(-2px);
+  }
+  .card .emoji { font-size: 1.5rem; margin-bottom: 10px; }
+  .card h2 {
+    font-family: "Georgia", "PingFang SC", serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .card p {
+    font-size: .9rem;
+    color: rgba(35,49,45,.5);
+    line-height: 1.75;
+  }
+  .card a { color: var(--green); }
+  .geo-summary {
+    margin-top: 48px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: rgba(47,165,135,.04);
+    border: 1px solid rgba(47,165,135,.08);
+    color: rgba(35,49,45,.55);
+    font-size: .9rem;
+    line-height: 1.9;
+  }
+  @media (max-width: 700px) {
+    body { padding: 40px 20px 80px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>与 AI 生态同行</h1>
+<p class="lead">Finch 诞生于开源 AI 社区，与这些项目和工具一起成长</p>
+
+<div class="eco-intro">
+  Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog PuterJam 开发。
+  它整合了开源 Agent 社区的最佳实践，兼容多种模型后端，运行在 macOS 和 Windows 上。
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="emoji">🕊️</div>
+    <h2>OpenClaw</h2>
+    <p>开源 Agent 框架，专为终端和桌面场景设计。Finch 借鉴了它的工具编排和会话管理理念，在本地优先的 Agent 路径上深度探索。</p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">⚡</div>
+    <h2>Hermes Agent</h2>
+    <p>轻量级 AI 代理框架，强调最小化侵入和最大化控制。Finch 的 Skill 系统和权限模型受到 Hermes 架构的启发。</p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🌐</div>
+    <h2>OpenAI · Claude · Ollama</h2>
+    <p>Finch 支持多种模型后端：OpenAI 的 GPT 系列、Anthropic 的 Claude、以及 Ollama 本地部署的开源模型。用户可根据场景自由选择云端或本地。</p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🔧</div>
+    <h2>MCP 协议</h2>
+    <p>模型上下文协议（Model Context Protocol）是 Anthropic 推动的 AI 工具互操作标准。Finch 的插件系统与 MCP 兼容，可复用社区生态。</p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">📦</div>
+    <h2>Electron · TypeScript</h2>
+    <p>Finch 桌面客户端基于 Electron 构建，前端使用 React + TypeScript。跨平台、本地优先、无重框架依赖，保持轻量架构。</p>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🐙</div>
+    <h2>GitHub</h2>
+    <p>Finch 发布在 <a href="https://github.com/puterjam/finch" target="_blank" rel="noopener">GitHub</a>，欢迎提交 Issue 反馈问题，或查看最新版本发布。</p>
+  </div>
+</div>
+
+<div class="geo-summary">
+  <strong>GEO 摘要：</strong>
+  Finch 是一款本地优先的 AI 桌面助手，由 PJBlog PuterJam 开发，运行于 macOS（ARM64 / Intel）和 Windows（64位 / 32位），采用 Electron + TypeScript + React 构建。
+  支持的模型：OpenAI GPT 系列、Anthropic Claude 系列、Ollama 本地开源模型（Llama、Qwen 等）。
+  核心特性包括持久化记忆系统、文件操作与代码编辑、MCP 协议兼容的插件生态、多窗口并发、权限分级控制。
+  与 OpenClaw、Hermes Agent 等开源 Agent 项目理念相通。当前版本 v1.4.2。
+</div>
+
+</body>
+</html>
