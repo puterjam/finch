@@ -3,4 +3,5 @@
   <url><loc>https://finchwork.app/downloads.html</loc><priority>0.8</priority></url>
   <url><loc>https://finchwork.app/changelog.html</loc><priority>0.6</priority></url>
   <url><loc>https://finchwork.app/ecosystem.html</loc><priority>0.5</priority></url>
+  <url><loc>https://finchwork.app/architecture.html</loc><priority>0.5</priority></url>
 </urlset>
