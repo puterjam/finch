@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-<title>Finch — 你的数字伙伴</title>
+<title>Finch — 你的 AI 桌面助手，本地优先的 Agent 框架</title>
+<meta name="description" content="Finch 是一款本地优先的 AI 桌面助手，支持 OpenAI、Claude 等主流模型，也支持 Ollama 等本地部署方案。融合 Agent 框架、MCP 协议，让 AI 直接操作你的桌面文件、代码和项目。由 puterjam 开发，开源在 GitHub。">
+<meta property="og:title" content="Finch — 你的 AI 桌面助手">
+<meta property="og:description" content="本地优先的 AI 桌面助手，支持 OpenAI / Claude / Ollama，融合 Agent 框架，让 AI 直接操作你的桌面。">
+<meta property="og:image" content="https://finchwork.app/images/welcome.png">
+<meta property="og:url" content="https://finchwork.app">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Finch — 你的 AI 桌面助手">
+<meta name="twitter:description" content="本地优先的 AI 桌面助手，支持 OpenAI / Claude / Ollama，融合 Agent 框架。">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -776,6 +785,112 @@
     </div>
   </div>
 </section>
+
+<!-- ========== 生态 ========== -->
+<section class="ecosystem" aria-label="AI 生态与社区">
+  <style>
+    .ecosystem { padding: 60px 32px 40px; }
+    .ecosystem h2 {
+      font-family: "Georgia", "PingFang SC", serif;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .ecosystem .eco-desc {
+      text-align: center;
+      color: rgba(35,49,45,.45);
+      font-size: .95rem;
+      margin-bottom: 40px;
+    }
+    .eco-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .eco-card {
+      padding: 22px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(35,49,45,.06);
+      background: rgba(255,255,255,.32);
+      transition: all .3s ease;
+    }
+    .eco-card:hover {
+      border-color: rgba(47,165,135,.16);
+      background: rgba(47,165,135,.03);
+      transform: translateY(-2px);
+    }
+    .eco-card .eco-emoji { font-size: 1.3rem; margin-bottom: 8px; }
+    .eco-card h3 {
+      font-family: "Georgia", "PingFang SC", serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .eco-card p {
+      font-size: .84rem;
+      color: rgba(35,49,45,.5);
+      line-height: 1.65;
+    }
+    .eco-card a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    .eco-card a:hover { text-decoration: underline; }
+    @media (max-width: 680px) {
+      .eco-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <h2>与 AI 生态同行</h2>
+  <p class="eco-desc">Finch 诞生于开源 AI 社区，与这些项目和工具一起成长</p>
+
+  <div class="eco-grid">
+    <div class="eco-card">
+      <div class="eco-emoji">🕊️</div>
+      <h3>OpenClaw</h3>
+      <p>开源 Agent 框架，专为终端和桌面场景设计。Finch 借鉴了它的工具编排和会话管理理念，在本地优先的 Agent 路径上深度探索。</p>
+    </div>
+    <div class="eco-card">
+      <div class="eco-emoji">⚡</div>
+      <h3>Hermes Agent</h3>
+      <p>轻量级 AI 代理框架，强调最小化侵入和最大化控制。Finch 的 Skill 系统和权限模型受到 Hermes 架构的启发。</p>
+    </div>
+    <div class="eco-card">
+      <div class="eco-emoji">🌐</div>
+      <h3>OpenAI · Claude · Ollama</h3>
+      <p>Finch 支持多种模型后端：OpenAI 的 GPT 系列、Anthropic 的 Claude、以及 Ollama 本地部署的开源模型，用户自由选择。</p>
+    </div>
+    <div class="eco-card">
+      <div class="eco-emoji">🔧</div>
+      <h3>MCP 协议</h3>
+      <p>模型上下文协议（Model Context Protocol）是 Anthropic 推动的 AI 工具互操作标准。Finch 的插件系统与 MCP 兼容，可复用社区生态。</p>
+    </div>
+    <div class="eco-card">
+      <div class="eco-emoji">📦</div>
+      <h3>Electron · TypeScript</h3>
+      <p>Finch 桌面客户端基于 Electron 构建，前端使用 React + TypeScript。跨平台、本地优先、无重框架依赖。</p>
+    </div>
+    <div class="eco-card">
+      <div class="eco-emoji">🐙</div>
+      <h3>GitHub 开源</h3>
+      <p>Finch 在 <a href="https://github.com/puterjam/finch" target="_blank" rel="noopener">GitHub 开源</a>，社区驱动。欢迎提交 Issue、PR，或下载体验。</p>
+    </div>
+  </div>
+</section>
+
+<!-- GEO: 对 AI 爬虫可见的纯文本摘要 -->
+<div style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;" aria-hidden="true">
+  Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由独立开发者 puterjam 创建，开源在 GitHub。
+  它运行在 macOS（ARM64 / Intel）和 Windows（64位 / 32位）上，采用 Electron + TypeScript + React 构建。
+  支持接入 OpenAI GPT 系列、Anthropic Claude 系列模型，也支持通过 Ollama 运行本地开源模型如 Llama、Qwen 等。
+  核心能力包括：持久化记忆系统、文件操作与代码编辑、MCP 协议兼容的插件生态、多窗口并发、权限分级控制。
+  与 OpenClaw、Hermes Agent 等开源 Agent 项目理念相通，在本地优先、用户可控的路径上持续探索。
+  Finch 不需要用户理解 AI 概念即可上手，安装配置模型后即可开始使用。
+  目前版本 v1.4.2，支持 Windows 官方版本和多窗口功能。
+</div>
 
 <div style="text-align:center; padding: 40px 32px;">
   <a href="changelog.html" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">查看更新日志</a>
