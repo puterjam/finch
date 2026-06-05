@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-<title>Finch — 你的 AI 桌面助手，本地优先的 Agent 框架</title>
-<meta name="description" content="Finch 是一款本地优先的 AI 桌面助手，支持 OpenAI、Claude 等主流模型，也支持 Ollama 等本地部署方案。融合 Agent 框架、MCP 协议，让 AI 直接操作你的桌面文件、代码和项目。由 PJBlog PuterJam 开发。">
-<meta property="og:title" content="Finch — 你的 AI 桌面助手">
-<meta property="og:description" content="本地优先的 AI 桌面助手，支持 OpenAI / Claude / Ollama，融合 Agent 框架，让 AI 直接操作你的桌面。">
+<title>Finch — Your AI Desktop Assistant, Local-First Agent Framework</title>
+<meta name="description" content="Finch is a local-first AI desktop assistant and agent framework. Supports OpenAI GPT, Anthropic Claude, Ollama local models. Built-in Skill system, Electron + TypeScript, cross-platform desktop client by PJBlog PuterJam.">
+<meta property="og:title" content="Finch — Your AI Desktop Assistant">
+<meta property="og:description" content="Local-first AI desktop assistant. Supports OpenAI / Claude / Ollama, agent framework, Skill system.">
 <meta property="og:image" content="https://finchwork.app/images/welcome.png">
-<meta property="og:url" content="https://finchwork.app">
+<meta property="og:url" content="https://finchwork.app/en/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Finch — 你的 AI 桌面助手">
-<meta name="twitter:description" content="本地优先的 AI 桌面助手，支持 OpenAI / Claude / Ollama，融合 Agent 框架。">
+<meta name="twitter:title" content="Finch — Your AI Desktop Assistant">
+<meta name="twitter:description" content="Local-first AI desktop assistant. Supports OpenAI / Claude / Ollama, agent framework.">
 <link rel="alternate" href="https://finchwork.app/ecosystem.html">
 <link rel="alternate" href="https://finchwork.app/architecture.html">
 <script type="application/ld+json">
@@ -25,7 +25,7 @@
   "operatingSystem": ["macOS", "Windows"],
   "applicationCategory": "DesktopApplication",
   "applicationSubCategory": "AIAssistant",
-  "description": "Finch 是一款本地优先的 AI 桌面助手和 Agent 框架。支持 OpenAI GPT、Anthropic Claude、Ollama 本地模型。内置 Skill 能力系统，跨平台桌面客户端。",
+  "description": "Finch is a local-first AI desktop assistant and agent framework. Supports OpenAI GPT, Anthropic Claude, Ollama. Built-in Skill system, cross-platform desktop client.",
   "author": {
     "@type": "Person",
     "name": "PJBlog PuterJam"
@@ -33,7 +33,7 @@
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "CNY"
+    "priceCurrency": "USD"
   },
   "screenshot": "https://finchwork.app/images/welcome.png"
 }
@@ -45,50 +45,50 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Finch 是什么？",
+      "name": "What is Finch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Finch 是一款本地优先的 AI 桌面助手，基于 Electron + TypeScript 构建。它内置 Agent 框架和 Skill 能力系统，支持 OpenAI、Claude、Ollama 等多种模型后端，让 AI 直接操作你的桌面文件、代码和项目。"
+        "text": "Finch is a local-first AI desktop assistant built with Electron + TypeScript. It features an agent framework and Skill system, supporting OpenAI, Claude, Ollama and other model backends, letting AI directly operate your desktop files, code and projects."
       }
     },
     {
       "@type": "Question",
-      "name": "Finch 支持哪些操作系统？",
+      "name": "What operating systems does Finch support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "macOS（ARM64 和 Intel）以及 Windows（64 位和 32 位）。"
+        "text": "macOS (ARM64 and Intel) and Windows (64-bit and 32-bit)."
       }
     },
     {
       "@type": "Question",
-      "name": "Finch 支持哪些 AI 模型？",
+      "name": "What AI models does Finch support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "OpenAI GPT 系列、Anthropic Claude 系列、Ollama 本地部署的开源模型（如 Llama、Qwen 等），以及兼容 OpenAI API 接口的第三方服务。"
+        "text": "OpenAI GPT series, Anthropic Claude series, Ollama local open-source models (Llama, Qwen, etc.), and any third-party service compatible with the OpenAI API."
       }
     },
     {
       "@type": "Question",
-      "name": "Finch 的核心功能有哪些？",
+      "name": "What are Finch's core features?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "持久化记忆系统、文件与代码操作、Skill 能力框架（文档处理、PDF 编辑、PPT 制作、前端设计、问卷调查等）、多窗口并发、权限分级控制（Ask / Accept Edits / Developer 模式）、会话恢复。"
+        "text": "Persistent memory system, file and code operations, Skill framework (document processing, PDF editing, PPT creation, front-end design, surveys, etc.), multi-window support, permission levels (Ask / Accept Edits / Developer mode), session resume."
       }
     },
     {
       "@type": "Question",
-      "name": "Finch 需要联网吗？",
+      "name": "Does Finch require internet?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "取决于模型配置。使用 Ollama 本地模型可离线运行；使用 OpenAI/Claude 等云端模型则需要联网。"
+        "text": "Depends on your model configuration. With Ollama local models, you can work offline. Cloud models like OpenAI and Claude require internet."
       }
     },
     {
       "@type": "Question",
-      "name": "Finch 的作者是谁？",
+      "name": "Who created Finch?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "由 PJBlog PuterJam 开发。"
+        "text": "Developed by PJBlog PuterJam."
       }
     }
   ]
@@ -791,9 +791,9 @@
 <body>
 
 <div class="lang-switcher">
-  <a href="/" class="active">中</a>
+  <a href="/">中</a>
   <span class="sep">/</span>
-  <a href="/en/">EN</a>
+  <a href="/en/" class="active">EN</a>
 </div>
 
 <!-- Particles -->
@@ -803,40 +803,40 @@
 <div class="hero">
   <img src="images/welcome.png" alt="Finch 欢迎界面">
   <h1 class="serif">Finch</h1>
-  <p class="tagline">一只停在你桌面上的小雀鸟，帮你衔来线索、织成脉络。</p>
+  <p class="tagline">A little finch perched on your desktop — gathering clues, weaving them into clarity.</p>
   <span class="scroll-hint">SCROLL</span>
 </div>
 
 <!-- ========== 三步引导 ========== -->
 <section class="flow">
-  <h2>三步开始，<em class="serif">和她相识</em></h2>
-  <p class="flow-subtitle">打开 Finch，她已经在等你了</p>
+  <h2>Three Steps to <em class="serif">Meet Her</em></h2>
+  <p class="flow-subtitle">Open Finch — she's already waiting</p>
 
   <div class="flow-grid">
     <div class="flow-card">
       <img src="images/build_home.png" alt="创建你的空间">
-      <span class="card-label">第一步</span>
-      <h3>给 Finch 安家</h3>
-      <p>起个昵称，这是你们认识的起点，她会记住你</p>
+      <span class="card-label">Step One</span>
+      <h3>Make a Home for Finch</h3>
+      <p>Give her a name — this is where your journey begins. She'll remember you.</p>
     </div>
 
     <div class="flow-card">
-      <img src="images/choose_ai.png" alt="选择 AI 模型">
-      <span class="card-label">第二步</span>
-      <h3>择羽衣</h3>
-      <p>第三方接入或本地部署，配置好模型，她就能开口了</p>
+      <img src="images/choose_ai.png" alt="Choose AI model">
+      <span class="card-label">Step Two</span>
+      <h3>Choose Her Plumage</h3>
+      <p>Connect a cloud model or deploy locally — once configured, she's ready to talk.</p>
     </div>
 
     <div class="flow-card">
-      <img src="images/go_home.png" alt="进入你的空间">
-      <span class="card-label">第三步</span>
-      <h3>进入 Finch 的小窝</h3>
-      <p>她已经开始行动了 — 孵化任务、建立档案，默默为你做着准备</p>
+      <img src="images/go_home.png" alt="Enter your Finch space">
+      <span class="card-label">Step Three</span>
+      <h3>Enter Finch's Nest</h3>
+      <p>She's already at work — hatching tasks, building profiles, quietly preparing for you.</p>
     </div>
 
     <div class="flow-card card-promise">
-      <p>从这里开始，每次打开 Finch，你都回到同一个地方。她记得上一次你们聊到哪，也记得你交代过什么</p>
-      <span class="promise-highlight">不需要重新介绍自己</span>
+      <p>From here on, every time you open Finch, you return to the same place. She remembers where you left off, and what you asked her to do.</p>
+      <span class="promise-highlight">No need to introduce yourself again</span>
     </div>
   </div>
 </section>
@@ -850,59 +850,59 @@
 
 <!-- ========== CTA ========== -->
 <section class="cta">
-  <h2>和 Finch 聊聊吧</h2>
-  <p class="cta-desc">桌面应用 · v1.4.2</p>
+  <h2>Meet Finch</h2>
+  <p class="cta-desc">Desktop app · v1.4.2</p>
   <div class="btn-group">
     <div class="btn-wrap" data-platform="mac-arm" data-download-label="下载 Mac ARM64 版">
       <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-arm64.dmg" class="btn-download">下载</a>
-      <span class="btn-hint">适合搭载 M 系列芯片的 Mac</span>
+      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-arm64.dmg" class="btn-download">Download</a>
+      <span class="btn-hint">For Apple Silicon Macs</span>
     </div>
-    <div class="btn-wrap" data-platform="mac-intel" data-download-label="下载 Mac Intel 通用版">
-      <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-x64.dmg" class="btn-download">下载</a>
-      <span class="btn-hint">适合搭载 Intel 芯片的 Mac</span>
+    <div class="btn-wrap" data-platform="mac-intel" data-download-label="Download Mac Intel">
+      <span class="recommend-tag">Recommended</span>
+      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-x64.dmg" class="btn-download">Download</a>
+      <span class="btn-hint">For Intel-based Macs</span>
     </div>
-    <div class="btn-wrap" data-platform="win-x64" data-download-label="下载 Windows x64 版">
-      <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-x64.exe" class="btn-download">下载</a>
-      <span class="btn-hint">适合 64 位 Windows 电脑</span>
+    <div class="btn-wrap" data-platform="win-x64" data-download-label="Download Windows x64">
+      <span class="recommend-tag">Recommended</span>
+      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-x64.exe" class="btn-download">Download</a>
+      <span class="btn-hint">For 64-bit Windows PCs</span>
     </div>
-    <div class="btn-wrap" data-platform="win-ia32" data-download-label="下载 Windows ia32 版">
-      <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-ia32.exe" class="btn-download">下载</a>
-      <span class="btn-hint">适合较旧的 32 位 Windows 电脑</span>
+    <div class="btn-wrap" data-platform="win-ia32" data-download-label="Download Windows ia32">
+      <span class="recommend-tag">Recommended</span>
+      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-ia32.exe" class="btn-download">Download</a>
+      <span class="btn-hint">For older 32-bit Windows PCs</span>
     </div>
   </div>
   <div class="unsupported-panel" id="download-unsupported">
-    <span class="btn-download btn-disabled">下载</span>
-    <div class="unsupported-note">当前系统暂未支持</div>
+    <span class="btn-download btn-disabled">Download</span>
+    <div class="unsupported-note">System not yet supported</div>
   </div>
   <div class="all-downloads">
-    <a href="downloads.html">查看全部支持的系统版本</a>
+    <a href="downloads.html">View all supported versions</a>
   </div>
 </section>
 
 <!-- ========== 小雀鸟的故事 ========== -->
 <section class="story">
-  <h2 class="serif">为什么是一只雀鸟</h2>
-  <p class="story-desc">因为好的陪伴应该像鸟一样 — 不沉重，不喧嚣，该出现时落在手边，该忙碌时飞向远方</p>
+  <h2 class="serif">Why a Finch</h2>
+  <p class="story-desc">Because good company should be like a bird — light, not noisy, there when you need it, gone when you're busy</p>
 
   <div class="story-verse-grid">
     <div class="verse">
       <div class="verse-num serif">I</div>
-      <h4>衔来线索</h4>
-      <p>散落各处的信息碎片，她帮你整理串联，织成脉络</p>
+      <h4>Gather Clues</h4>
+      <p>Scattered fragments of information — she helps you organize and weave them into patterns</p>
     </div>
     <div class="verse">
       <div class="verse-num serif">II</div>
-      <h4>振翅连接</h4>
-      <p>穿梭在你的项目和工具之间，轻盈进入你的工作现场</p>
+      <h4>Connect and Fly</h4>
+      <p>Moving between your projects and tools, gliding seamlessly into your workflow</p>
     </div>
     <div class="verse">
       <div class="verse-num serif">III</div>
-      <h4>守巢执行</h4>
-      <p>交代的事情稳步跟进，不催促，也不遗忘</p>
+      <h4>Guard the Nest</h4>
+      <p>Tasks you've given her are followed through steadily — without rush, without forgetting</p>
     </div>
   </div>
 </section>
@@ -910,20 +910,20 @@
 <!-- ========== 生态 ========== -->
 <!-- GEO: 对 AI 爬虫可见的纯文本摘要 -->
 <div style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;" aria-hidden="true">
-Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog PuterJam 开发，运行在 macOS 和 Windows 上。它让 AI 直接操作你的桌面文件、代码和项目，内置 Skill 能力系统，支持多种模型后端，无需理解 AI 概念即可使用。
+Finch is a local-first AI desktop assistant and agent framework, developed by PJBlog PuterJam, running on macOS and Windows. It lets AI directly operate your desktop files, code and projects, with a built-in Skill system supporting multiple model backends — no AI knowledge required.
 
-技术栈：Electron + TypeScript + React，跨平台桌面客户端。内存系统支持持久化会话和上下文恢复。权限系统提供 Ask、Accept Edits、Developer 三种模式。插件体系兼容 Skill 框架，支持文档处理、PDF 编辑、PPT 制作、前端设计等能力。模型层兼容 OpenAI API 协议。
+Tech stack: Electron + TypeScript + React, cross-platform desktop client. Memory system with persistent sessions and context recall. Permission system with Ask, Accept Edits, and Developer modes. Skill framework for document processing, PDF editing, PPT creation, front-end design, and more. Model layer compatible with OpenAI API protocol.
 
-支持的操作系统：macOS ARM64、macOS Intel、Windows 64位、Windows 32位。支持的模型：OpenAI GPT 系列、Anthropic Claude 系列、Ollama 本地开源模型。当前版本 v1.4.2。
+Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supported models: OpenAI GPT series, Anthropic Claude series, Ollama local open-source models. Current version: v1.4.2.
 </div>
 
 <div style="text-align:center; padding: 40px 32px;">
-  <a href="changelog.html" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">查看更新日志</a>
+  <a href="changelog.html" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">Changelog</a>
   <span style="color: rgba(35,49,45,.2); margin: 0 8px;">·</span>
-  <a href="https://github.com/puterjam/finch/issues" target="_blank" rel="noopener" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">问题反馈</a>
+  <a href="https://github.com/puterjam/finch/issues" target="_blank" rel="noopener" style="color: rgba(35,49,45,.35); font-size: .85rem; text-decoration: none;">Report Issues</a>
 </div>
 
-<footer>Finch — 以自然的方式使用 AI</footer>
+<footer>Finch — Use AI, Naturally</footer>
 
 <script>
 (() => {

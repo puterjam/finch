@@ -21,23 +21,6 @@
     --forest: #23312d;
   }
   html { scroll-behavior: smooth; }
-  /* ---- Language Switcher ---- */
-  .lang-switcher {
-    position: fixed; top: 20px; right: 28px; z-index: 100;
-    display: flex; align-items: center; gap: 4px;
-    font-family: -apple-system, "PingFang SC", sans-serif;
-    font-size: .82rem;
-  }
-  .lang-switcher a {
-    display: inline-flex; align-items: center;
-    padding: 4px 10px; border-radius: 8px;
-    color: rgba(35,49,45,.4); text-decoration: none;
-    transition: all .2s ease;
-  }
-  .lang-switcher a:hover { color: #2fa587; background: rgba(47,165,135,.08); }
-  .lang-switcher a.active { color: #2fa587; font-weight: 600; }
-  .lang-switcher .sep { color: rgba(35,49,45,.15); }
-  @media (max-width: 700px) { .lang-switcher { top: 14px; right: 16px; } }
   body {
     font-family: "Georgia", "PingFang SC", serif;
     background: var(--ivory);
@@ -155,12 +138,6 @@
 </style>
 </head>
 <body>
-
-<div class="lang-switcher">
-  <a href="/downloads.html" class="active">中</a>
-  <span class="sep">/</span>
-  <a href="/en/downloads.html">EN</a>
-</div>
 
 <a href="index.html" class="back">&larr; 返回首页</a>
 <h1>支持的系统版本</h1>
