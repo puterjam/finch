@@ -1,170 +1,93 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-<title>Finch 更新日志 — AI 桌面助手版本记录</title>
-<meta name="description" content="Finch AI 桌面助手更新日志。了解最新功能、修复和改进。Finch 是一款本地优先的 Agent 框架，支持 OpenAI、Claude、Ollama，让 AI 直接操作你的桌面。">
-<meta property="og:title" content="Finch 更新日志 — AI 桌面助手">
-<meta property="og:description" content="Finch AI 桌面助手版本更新记录，本地优先的 Agent 框架。">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="../favicon.png">
+<title>Finch Changelog — AI Desktop Assistant Version History</title>
+<meta name="description" content="Finch AI desktop assistant changelog. Latest features, fixes, and improvements. Local-first agent framework, supports OpenAI, Claude, Ollama. By PJBlog PuterJam.">
+<meta property="og:title" content="Finch Changelog — AI Desktop Assistant Version History">
+<meta property="og:description" content="Finch AI desktop assistant version history, local-first agent framework changelog.">
 <meta property="og:image" content="https://finchwork.app/images/welcome.png">
-<meta property="og:url" content="https://finchwork.app/changelog.html">
+<meta property="og:url" content="https://finchwork.app/en/changelog.html">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --green: #2fa587;
-    --lime: #87d77a;
-    --cyan: #5fafc9;
-    --ivory: #f6f4ee;
-    --forest: #23312d;
-    --orange: #ff8a4c;
-  }
-
+  :root { --green: #2fa587; --lime: #87d77a; --cyan: #5fafc9; --ivory: #f6f4ee; --forest: #23312d; --orange: #ff8a4c; }
   html { scroll-behavior: smooth; }
-
+  /* ---- Language Switcher ---- */
+  .lang-switcher {
+    position: fixed; top: 20px; right: 28px; z-index: 100;
+    display: flex; align-items: center; gap: 4px;
+    font-family: -apple-system, "PingFang SC", sans-serif; font-size: .82rem;
+  }
+  .lang-switcher a {
+    display: inline-flex; align-items: center;
+    padding: 4px 10px; border-radius: 8px;
+    color: rgba(35,49,45,.4); text-decoration: none; transition: all .2s ease;
+  }
+  .lang-switcher a:hover { color: #2fa587; background: rgba(47,165,135,.08); }
+  .lang-switcher a.active { color: #2fa587; font-weight: 600; }
+  .lang-switcher .sep { color: rgba(35,49,45,.15); }
+  @media (max-width: 700px) { .lang-switcher { top: 14px; right: 16px; } }
   body {
     font-family: "Georgia", "PingFang SC", serif;
-    background: var(--ivory);
-    color: var(--forest);
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 32px 100px;
+    background: var(--ivory); color: var(--forest);
+    line-height: 1.75; -webkit-font-smoothing: antialiased;
+    max-width: 720px; margin: 0 auto; padding: 60px 32px 100px;
   }
-
   a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
-
-  .back {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: .85rem;
-    color: rgba(35,49,45,.4);
-    margin-bottom: 48px;
-  }
+  .back { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; color: rgba(35,49,45,.4); margin-bottom: 48px; }
   .back:hover { color: var(--green); text-decoration: none; }
-
-  h1 {
-    font-family: "Georgia", "PingFang SC", serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: -.02em;
-  }
-
-  h1 + p {
-    color: rgba(35,49,45,.4);
-    font-size: .92rem;
-    margin-bottom: 56px;
-  }
-
-  .version {
-    margin-bottom: 56px;
-    padding-bottom: 56px;
-    border-bottom: 1px solid rgba(35,49,45,.06);
-  }
-
-  .version:last-child {
-    border-bottom: none;
-  }
-
-  .version h2 {
-    font-family: "Georgia", "PingFang SC", serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .version .date {
-    font-size: .82rem;
-    color: rgba(35,49,45,.35);
-    margin-bottom: 28px;
-  }
-
-  .version h3 {
-    font-size: .75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    color: var(--green);
-    margin-bottom: 12px;
-    font-family: -apple-system, sans-serif;
-  }
-
-  .version h3 + ul {
-    margin-bottom: 24px;
-  }
-
-  .version ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .version li {
-    font-size: .92rem;
-    color: rgba(35,49,45,.6);
-    line-height: 1.7;
-    padding-left: 16px;
-    position: relative;
-    margin-bottom: 6px;
-  }
-
-  .version li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 5px;
-    height: 5px;
-    background: var(--lime);
-    border-radius: 50%;
-  }
-
-  .version li strong {
-    color: var(--forest);
-    font-weight: 600;
-  }
-
-  @media (max-width: 600px) {
-    body { padding: 40px 20px 80px; }
-    h1 { font-size: 1.8rem; }
-  }
+  h1 { font-family: "Georgia", "PingFang SC", serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -.02em; }
+  h1 + p { color: rgba(35,49,45,.4); font-size: .92rem; margin-bottom: 56px; }
+  .version { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(35,49,45,.06); }
+  .version:last-child { border-bottom: none; }
+  .version h2 { font-family: "Georgia", "PingFang SC", serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  .version .date { font-size: .82rem; color: rgba(35,49,45,.35); margin-bottom: 28px; }
+  .version h3 { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--green); margin-bottom: 12px; font-family: -apple-system, sans-serif; }
+  .version h3 + ul { margin-bottom: 24px; }
+  .version ul { list-style: none; padding: 0; }
+  .version li { font-size: .92rem; color: rgba(35,49,45,.6); line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 6px; }
+  .version li::before { content: ''; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; background: var(--lime); border-radius: 50%; }
+  .version li strong { color: var(--forest); font-weight: 600; }
+  @media (max-width: 600px) { body { padding: 40px 20px 80px; } h1 { font-size: 1.8rem; } }
 </style>
 </head>
 <body>
 
-<a href="index.html" class="back">&larr; 返回首页</a>
+<div class="lang-switcher">
+  <a href="/changelog.html">中</a>
+  <span class="sep">/</span>
+  <a href="/en/changelog.html" class="active">EN</a>
+</div>
 
-<h1>更新日志</h1>
-<p>Finch 的每一次成长，都在这里记录。</p>
+<a href="index.html" class="back">&larr; Back to Home</a>
+
+<h1>Changelog</h1>
+<p>Every step of Finch's growth, recorded here.</p>
 
 <!-- ====== 1.4.2 ====== -->
 <div class="version">
   <h2>1.4.2</h2>
   <p class="date">2026-06-04</p>
 
-  <h3>新增</h3>
+  <h3>New</h3>
   <ul>
-    <li><strong>Windows 官方支持</strong>：新增 Windows x64 / ia32 安装包下载，官网可直接获取对应版本</li>
-    <li><strong>多窗口升级</strong>：支持多窗口 URI 智能路由，流事件可广播给所有正在查看同一会话的窗口</li>
-    <li><strong>finch:// 深链接</strong>：支持通过 URI Scheme 直接跳转到指定会话</li>
-    <li><strong>用量统计重构</strong>：用量统计与设置页统一布局，支持缓存与骨架屏，查看更稳定</li>
-    <li><strong>Grep / Edit 工具优化</strong>：Grep 支持更多输出控制参数，Edit 增加读前写保护</li>
+    <li><strong>Windows Official Support</strong>: Added Windows x64 / ia32 installer downloads available directly from the website</li>
+    <li><strong>Multi-Window Upgrade</strong>: Smart URI routing across windows, streaming events broadcast to all windows viewing the same session</li>
+    <li><strong>finch:// Deep Links</strong>: Jump directly to a specific session via URI Scheme</li>
+    <li><strong>Usage Statistics Redesign</strong>: Unified layout with caching and skeleton screens</li>
+    <li><strong>Grep / Edit Tool Improvements</strong>: Grep with more output control parameters, Edit with read-before-write protection</li>
   </ul>
 
-  <h3>优化</h3>
+  <h3>Optimization</h3>
   <ul>
-    <li><strong>全平台兼容性提升</strong>：修复 Windows / Linux 下的标题栏、快捷键、路径与窗口外壳问题</li>
-    <li><strong>rg 解析策略重做</strong>：优先使用 Finch 自带 ripgrep，缺失时自动补齐并回退系统工具</li>
-    <li><strong>字体本地化</strong>：移除 Google Fonts CDN 依赖，改为内置托管</li>
-    <li><strong>记忆系统更稳健</strong>：超容量时自动淘汰归档，不再直接报错</li>
-    <li><strong>模型排序优化</strong>：供应商与内置模型排序更清晰，自定义模型识别更准确</li>
+    <li><strong>Cross-Platform Compatibility</strong>: Fixed title bar, shortcuts, path, and window shell issues on Windows/Linux</li>
+    <li><strong>Font Localization</strong>: Removed Google Fonts CDN dependency, switched to self-hosted fonts</li>
+    <li><strong>Memory System Stability</strong>: Auto-archive when exceeding capacity instead of throwing errors</li>
   </ul>
 </div>
 
@@ -173,47 +96,40 @@
   <h2>1.4.1</h2>
   <p class="date">2026-06-01</p>
 
-  <h3>新增</h3>
+  <h3>New</h3>
   <ul>
-    <li><strong>Claude & OpenAI 模型全面接入</strong>：支持 Claude 订阅、Anthropic API 及 OpenAI API，在设置中选择接入方式即可切换使用，无需重启</li>
-    <li><strong>OAuth 登录</strong>：支持通过 OAuth 授权登录云端服务，不再需要手动填写 API Key</li>
-    <li><strong>对话分支</strong>：在任意 AI 回复上点击分支按钮，从当前上下文开启新方向继续对话，原会话保持不变</li>
-    <li><strong>空间与目录关联</strong>：空间可绑定本地目录，AI 自动感知工作区上下文；目录空间与普通空间区分展示</li>
-    <li><strong>后台任务管理</strong>：AI 可在后台执行长时间任务，完成后推送通知；关闭主窗口后任务照常运行</li>
-    <li><strong>只读命令自动放行</strong>：ls、cat、grep 等只读操作不再弹出权限确认</li>
-    <li><strong>附件支持升级</strong>：图片自动压缩并显示缩略图，PDF 支持本地文本抽取后直接传给 AI</li>
-    <li><strong>WebFetch / WebSearch</strong>：支持网页抓取与搜索，AI 可主动获取最新信息辅助回答</li>
-    <li><strong>⌘⇧B 快捷键</strong>：随时快速展开或收起右侧工具栏</li>
-    <li><strong>支持后端推理</strong>：客户端窗口关闭不会打断模型的长任务工作</li>
+    <li><strong>Claude & OpenAI Model Integration</strong>: Full support for Claude subscriptions, Anthropic API, and OpenAI API</li>
+    <li><strong>OAuth Login</strong>: Authorize cloud services via OAuth without manual API key entry</li>
+    <li><strong>Conversation Branching</strong>: Start new directions from any AI response while keeping the original session intact</li>
+    <li><strong>Space-Directory Binding</strong>: Bind local directories to spaces for automatic context awareness</li>
+    <li><strong>Background Task Management</strong>: Long-running tasks continue after closing the main window</li>
+    <li><strong>Read-Only Auto-Approval</strong>: Commands like ls, cat, grep no longer prompt for permission</li>
+    <li><strong>⌘⇧B Shortcut</strong>: Quick toggle for the right-side toolbar</li>
   </ul>
 
-  <h3>优化</h3>
+  <h3>Optimization</h3>
   <ul>
-    <li><strong>记忆能力提升</strong>：会话结束后自动提炼关键信息并写入记忆，跨会话保持上下文；记忆搜索按日期降序优先展示最近内容</li>
-    <li><strong>工作抽屉交互重做</strong>：工具调用、文件变更、命令执行按类型聚合展示，任务完成后只保留文件数、行差、耗时等有效信息</li>
-    <li><strong>对话列表可读性提升</strong>：连续 AI 回复自动合并为一条展示；隐藏 Thinking 时相邻回复同步合并</li>
-    <li><strong>权限与提问卡片全面重构</strong>：统一卡片管理系统，窗口切换后不再消失；响应后立即关闭；拒绝权限时批量关闭</li>
-    <li><strong>会话状态指示器重做</strong>：运行中由呼吸圆点升级为旋转加载环，等待确认时显示脉冲发光</li>
-    <li><strong>运行中实时显示 token 用量</strong>：对话进行中即可看到本次 turn 的 token 消耗</li>
-    <li><strong>批量归档会话</strong>：标题栏菜单支持一键归档 7 天不活跃的会话</li>
-    <li><strong>Thinking 块视觉优化</strong>：推理进行时自动滚底跟踪；去掉背景 grain 纹理</li>
-    <li><strong>内存性能优化</strong>：会话 timeline 启用 LRU 淘汰策略，后台轮询请求合并</li>
-    <li><strong>Bash 环境修复</strong>：命令执行改为加载 shell profile，解决 Electron 启动时 PATH 缺失问题</li>
-    <li><strong>上下文超长错误引导</strong>：显式提示内容过长时可开启新会话或分多次发送，错误旁增加「开启新会话」按钮</li>
+    <li><strong>Memory Improvement</strong>: Auto-distillation after sessions, cross-session context retention</li>
+    <li><strong>Work Drawer Redesign</strong>: Tool calls, file changes, and commands grouped by type</li>
+    <li><strong>Conversation List</strong>: Consecutive AI responses merged; adjacent Thinking blocks merged when hidden</li>
+    <li><strong>Permission Card Rework</strong>: Unified card management, cards persist across window switches</li>
+    <li><strong>Running State Indicator</strong>: Spinning loader for running state, pulse glow for waiting</li>
+    <li><strong>Real-Time Token Display</strong>: See token usage during active conversations</li>
+    <li><strong>Batch Archive</strong>: Archive 7-day inactive sessions in one click</li>
+    <li><strong>Bash Environment Fix</strong>: Commands now load shell profiles, fixing PATH issues in Electron</li>
   </ul>
 
-  <h3>修复</h3>
+  <h3>Fixes</h3>
   <ul>
-    <li><strong>连续发送消息不再丢失</strong>：修复快速连续发送多条消息时的队列竞态问题</li>
-    <li><strong>窗口切换后不再叠字</strong>：切到后台再切回，AI 回复内容不再出现重复渲染</li>
-    <li><strong>权限卡与提问卡窗口重开后可用</strong>：重新打开窗口后未完成的权限请求和提问卡片正常恢复</li>
-    <li><strong>编辑消息后对话正常延续</strong>：修复编辑历史消息后分支数据错误，编辑后的对话完整保留上下文</li>
-    <li><strong>侧边栏幽灵会话消失</strong>：修复 session 扫描将普通消息 ID 误注册为 session 的问题</li>
-    <li><strong>Thinking 推理完成后折叠状态正确</strong>：修复推理结束后 thinking 块意外全部折叠的问题</li>
-    <li><strong>工具超时不再误中断等待</strong>：等待用户确认权限或提问期间暂停超时计时，响应后重启</li>
-    <li><strong>背景会话完成状态同步</strong>：修复后台运行的会话完成后侧边栏状态不更新的问题</li>
-    <li><strong>新建会话不误清空间选择</strong>：修复新建 session 时错误重置当前已选工作空间的问题</li>
-    <li><strong>会话归档/删除日期解析修复</strong>：修复迁移会话时日期字段存储为无法解析的文本的问题</li>
+    <li>Fixed message queue race condition when sending messages rapidly</li>
+    <li>Fixed duplicate rendering after window switch</li>
+    <li>Fixed permission and question cards recovering properly after window reopen</li>
+    <li>Fixed branch data errors when editing history messages</li>
+    <li>Fixed ghost sessions in sidebar</li>
+    <li>Fixed Thinking block collapse state after reasoning completes</li>
+    <li>Fixed tool timeout interrupting permission wait</li>
+    <li>Fixed background session status not syncing to sidebar</li>
+    <li>Fixed date parsing for archived/deleted sessions</li>
   </ul>
 </div>
 
@@ -222,38 +138,19 @@
   <h2>1.3.0</h2>
   <p class="date">2026-05-21</p>
 
-  <h3>新增</h3>
+  <h3>New</h3>
   <ul>
-    <li><strong>完整记忆系统（测试版）</strong>：会话结束时自动蒸馏对话为事实，分类写入身份与记忆文件，支持信任评分与低分归档</li>
-    <li><strong>MCP 应用桥接</strong>：通过 AI 交互管理空间、调整外观设置、查询版本与执行应用升级</li>
-    <li><strong>空间路由与工作目录</strong>：空间可关联本地目录，目录空间与普通空间区分展示</li>
-    <li><strong>会话自动命名</strong>：AI 根据对话内容自动生成会话标题</li>
-    <li><strong>对话压缩状态提示</strong>：上下文自动压缩时显示压缩中动画与完成标记</li>
-    <li><strong>设置页增强</strong>：新增辅助模型选择、记忆模式配置与统计面板</li>
-    <li><strong>工作区交互优化</strong>：文件名超长截断、规则文件图标与点击定位</li>
-    <li><strong>日志分组展示</strong>：最近 7 条日志，超出引导查看完整目录</li>
-    <li><strong>右侧工具栏重构</strong>：支持 docked / floating 双模式</li>
+    <li><strong>Complete Memory System (Beta)</strong>: Auto-distill conversations into facts, with trust scoring and low-score archiving</li>
+    <li><strong>MCP App Bridge</strong>: Manage spaces, appearance, version, and updates via AI interaction</li>
+    <li><strong>Session Auto-Naming</strong>: AI generates session titles based on conversation content</li>
+    <li><strong>Compression Status</strong>: Visual indicator when conversation context is being compressed</li>
   </ul>
 
-  <h3>优化</h3>
+  <h3>Optimization</h3>
   <ul>
-    <li><strong>渲染性能大幅提升</strong>：滚动容器、静态消息、代码块全面启用合成层优化</li>
-    <li><strong>SyntaxHighlighter 懒加载</strong>：流式输出跳过高亮，完成后渲染，降低实时 CPU 占用</li>
-    <li><strong>推理实时统计</strong>：cache 和输出 token 在推理过程中实时更新</li>
-    <li><strong>记忆搜索改进</strong>：搜索日志文件而非已注入内容，结果按日期排序</li>
-    <li><strong>侧栏视觉统一</strong>：分区标题置顶，修复缩窄时换行与 icon 消失</li>
-    <li><strong>更新通知重做</strong>：全局固定显示，进度条与按钮更醒目</li>
-  </ul>
-
-  <h3>Bug 修复</h3>
-  <ul>
-    <li>修复切换会话时 Composer 模型选择不更新</li>
-    <li>修复键盘导航跳过空间会话</li>
-    <li>修复 Composer 输入框在页面挤压时不增高</li>
-    <li>过滤 task-notification 防止内部事件泄漏到界面</li>
-    <li>修复空间目录路径未规范化导致去重失败</li>
-    <li>修复多 provider token 计数合并逻辑</li>
-    <li>修复 x64 交叉编译包内缺少 native binary 的问题</li>
+    <li><strong>Render Performance</strong>: Compositing layer optimization for scroll containers, messages, and code blocks</li>
+    <li><strong>SyntaxHighlighter Lazy Load</strong>: Skip highlighting during streaming, render after completion</li>
+    <li><strong>Memory Search</strong>: Search log files by date, results sorted chronologically</li>
   </ul>
 </div>
 
@@ -262,29 +159,10 @@
   <h2>1.2.1</h2>
   <p class="date">2026-05-18</p>
 
-  <h3>新增</h3>
+  <h3>New</h3>
   <ul>
-    <li><strong>多窗口模式</strong>：支持新窗口直接开启新对话，并在多窗口间同步必要的工作区与设置状态</li>
-    <li><strong>独立设置窗口</strong>：设置改为独立窗口，支持多窗口场景下更稳定地打开、切换和保存配置</li>
-    <li><strong>工作区面板增强</strong>：新增更多文件与站点信息展示能力，页面标题会异步补全</li>
-  </ul>
-
-  <h3>优化</h3>
-  <ul>
-    <li><strong>多窗口布局策略</strong>：空间不足时优先收起左侧会话栏，尽量保留对话区和工作区</li>
-    <li><strong>侧栏状态恢复</strong>：优化窗口恢复、Dock 激活和新窗口状态恢复时的侧栏表现，减少页面被过度挤压</li>
-    <li><strong>右栏偏好记忆</strong>：右侧工作栏偏好改为全局记忆，运行时按窗口独立判断，应用恢复时延续最后关闭窗口的状态</li>
-    <li><strong>交互细节</strong>：优化输入框、会话列表、右栏面板和工具调用展示的交互细节与焦点样式</li>
-    <li><strong>流式渲染性能</strong>：优化流式对话渲染性能，降低历史消息与实时输出的重复渲染开销</li>
-  </ul>
-
-  <h3>Bug 修复</h3>
-  <ul>
-    <li><strong>新窗口会话隔离</strong>：修复新窗口可能继承上一窗口会话的问题</li>
-    <li><strong>多窗口侧栏状态</strong>：修复多窗口模式下侧栏置顶和最近列表默认折叠的问题</li>
-    <li><strong>对话宽度保护</strong>：修复窗口恢复时安全对话宽度保护不生效的问题</li>
-    <li><strong>模型设置</strong>：修复自定义模型、未启用供应商统计、Context Window 用量统计等相关问题</li>
-    <li><strong>工作区面板</strong>：修复工作区面板扫描、滚动布局和文件列表展示中的若干问题</li>
+    <li><strong>Multi-Window Mode</strong>: Open new conversations in new windows with synchronized workspace and settings</li>
+    <li><strong>Dedicated Settings Window</strong>: Settings opened in a separate window for stable multi-window usage</li>
   </ul>
 </div>
 
@@ -293,32 +171,12 @@
   <h2>1.2.0</h2>
   <p class="date">2026-05-16</p>
 
-  <h3>新增</h3>
+  <h3>New</h3>
   <ul>
-    <li><strong>在线自动更新</strong>：接入 electron-updater，启动后静默检查 GitHub Release，发现新版本后台自动下载，用户决定何时重启安装</li>
-    <li><strong>首页更新提示气泡</strong>：首页右上角实时显示更新状态（发现新版本 / 下载进度 / 点击重启安装），品牌绿配色</li>
-    <li><strong>预发布通道</strong>：设置 → 关于 新增"接收预发布版本"开关，可提前体验 beta 版本</li>
-    <li><strong>身份文件快照</strong>：重新孵化或覆盖前，身份文件自动备份至 ~/.finch/snapshots/，保留最近 20 份</li>
-    <li><strong>智谱 GLM Code Plan</strong>：新增内置供应商，支持 GLM-5.1 / GLM-4.7 / GLM-4.5-Air，200k 上下文</li>
-    <li><strong>工作区面板初始扫描</strong>：新建会话时自动扫描当前目录并展示文件结构，不再显示空白面板</li>
-    <li><strong>工具调用动画</strong>：运行中的工具调用显示限流滚动动画，超长路径自动截断美化展示</li>
-  </ul>
-
-  <h3>优化</h3>
-  <ul>
-    <li><strong>启动速度</strong>：冷启动白屏时间大幅缩短，webview 提前预加载，打开时不再闪白屏</li>
-    <li><strong>包体积</strong>：PNG 资源全量压缩，安装包体积减少约 81%</li>
-    <li><strong>Context Window 统计</strong>：改用 assistant 消息级别 usage 计算，避免数值虚高</li>
-    <li><strong>更新状态管理</strong>：更新逻辑抽离为独立 updateStore，后台每 4 小时自动检查，错误提示中文化</li>
-    <li><strong>会话列表排序</strong>：过滤 SDK metadata 行 mtime 干扰，排序结果稳定不跳动</li>
-  </ul>
-
-  <h3>Bug 修复</h3>
-  <ul>
-    <li><strong>backdrop-filter 失效</strong>：修复打包后 blur 特效失效的问题（browserslist 配置导致）</li>
-    <li><strong>AskUserQuestion 选项截断</strong>：移除 description 副标题展示，label 保证完整可读</li>
-    <li><strong>工作区面板</strong>：修复新建会话后面板显示为空、滚动区域、分组展示三处异常</li>
-    <li><strong>重新孵化后引导语</strong>：修复重新孵化后首页未自动填入引导语的问题</li>
+    <li><strong>Auto Update</strong>: electron-updater integration, silent background check on GitHub Releases</li>
+    <li><strong>Pre-release Channel</strong>: Settings toggle for beta version previews</li>
+    <li><strong>Identity File Snapshots</strong>: Auto-backup before re-hatch, retains last 20 snapshots</li>
+    <li><strong>Tool Call Animation</strong>: Scrolling animation during active tool calls</li>
   </ul>
 </div>
 
@@ -327,61 +185,26 @@
   <h2>1.1.0</h2>
   <p class="date">2026-05-15</p>
 
-  <h3>新功能</h3>
+  <h3>New</h3>
   <ul>
-    <li><strong>Mermaid 图表渲染</strong>：CodeBlock 支持 Mermaid 图表实时渲染，可在预览与源码间切换</li>
-    <li><strong>HTML 文件预览</strong>：HTML 文件改为 webview 渲染，支持真实页面预览而非展示源码</li>
-    <li><strong>附件持久化</strong>：附件文件现可跨会话持久化，会话视图同步改造</li>
-    <li><strong>工作目录侧栏折叠</strong>：WorkSidebar 工作目录分区支持折叠并记忆折叠状态</li>
-    <li><strong>Markdown 预览</strong>：CodeBlock 支持 Markdown 预览与原始内容切换</li>
-    <li><strong>HATCH 孵化流程</strong>：重写 HATCH 孵化流程，与 user-profile 完整联动</li>
-  </ul>
-
-  <h3>性能优化</h3>
-  <ul>
-    <li><strong>消除启动白屏</strong>：优化启动性能，消除应用启动时白屏闪烁</li>
-    <li><strong>webview 预加载</strong>：webview 在动画开始前提前加载，消除打开时的白屏</li>
-  </ul>
-
-  <h3>界面优化</h3>
-  <ul>
-    <li><strong>外观设置重设计</strong>：新增字体大小调节、主题分段控件，主目录卡片全面重设计</li>
-    <li><strong>设置窗口宽度限制</strong>：打开设置时强制窗口宽度不低于 960px，关闭后恢复限制</li>
-    <li><strong>设置页装饰图</strong>：设置页装饰图随窗口宽度自适应缩放</li>
-    <li><strong>首页提示文案</strong>：优化首页提示文案样式与目录按钮展示</li>
-    <li><strong>模型设置页面</strong>：优化模型设置页面交互细节</li>
-    <li><strong>侧栏交互</strong>：优化侧栏交互体验</li>
-  </ul>
-
-  <h3>Bug 修复</h3>
-  <ul>
-    <li><strong>历史会话继续对话</strong>：修复搬家后历史会话无法继续对话的问题</li>
-    <li><strong>推理底部指示器</strong>：修复推理中底部指示器抖动问题</li>
-    <li><strong>推理历史渲染</strong>：区分推理中断的历史渲染状态</li>
-    <li><strong>AskUserQuestion 文本长度</strong>：限制问题文本长度，避免提问过长</li>
-    <li><strong>设置关闭通知</strong>：改用 useEffect 清理函数触发 notifySettingsClose，修复时序问题</li>
-    <li><strong>会话输入与推理展示</strong>：优化会话输入与推理代码块展示</li>
-  </ul>
-
-  <h3>其他</h3>
-  <ul>
-    <li><strong>安全依赖升级</strong>：升级 Electron，修复 18 个 Dependabot 安全告警</li>
-    <li><strong>CN 服务商补充</strong>：补充各 CN 服务商 apiKeyUrl 并修正模型上下文长度</li>
+    <li><strong>Mermaid Chart Rendering</strong>: Real-time Mermaid rendering in CodeBlock</li>
+    <li><strong>HTML Preview</strong>: HTML files rendered in webview for real page preview</li>
+    <li><strong>Attachment Persistence</strong>: Files persisted across sessions</li>
+    <li><strong>HATCH Flow Rewrite</strong>: Full rewrite of the hatch flow linked to user profile</li>
   </ul>
 </div>
 
 <!-- ====== 1.0.0 ====== -->
 <div class="version">
   <h2>1.0.0</h2>
-  <p class="date">2026-05-14 · 首次发布</p>
+  <p class="date">2026-05-14 · Initial Release</p>
 
-  <h3>核心功能</h3>
+  <h3>Core Features</h3>
   <ul>
-    <li>AI 多轮对话与智能推理</li>
-    <li>工作目录管理与多目录切换</li>
-    <li>模型配置，支持多家 AI 服务商</li>
-    <li>设置弹窗与 IPC 通信架构</li>
-    <li>macOS DMG 安装包，支持 Retina 背景图与自动版本号同步</li>
+    <li>AI multi-turn conversation and intelligent reasoning</li>
+    <li>Working directory management and switching</li>
+    <li>Model configuration with multiple AI provider support</li>
+    <li>macOS DMG installer with Retina support</li>
   </ul>
 </div>
 

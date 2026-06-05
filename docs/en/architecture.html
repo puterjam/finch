@@ -1,227 +1,162 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-<title>Finch 技术架构 — AI 桌面助手与 Agent 框架设计</title>
-<meta name="description" content="Finch 技术架构概览：Electron + TypeScript 双进程架构，Agent 核心层、Skill 能力系统、权限控制、记忆系统、多模型后端的整体设计。由 PJBlog PuterJam 开发。">
-<meta property="og:title" content="Finch 技术架构 — AI 桌面助手与 Agent 框架设计">
-<meta property="og:description" content="Finch 技术架构概览：Electron + TypeScript 双进程，Agent 核心、Skill 系统、权限控制、记忆系统。">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="../favicon.png">
+<title>Finch Architecture — AI Desktop Assistant & Agent Framework Design</title>
+<meta name="description" content="Finch architecture overview: Electron + TypeScript dual-process architecture, Agent core, Skill system, permission control, memory system, multi-model backend design. By PJBlog PuterJam.">
+<meta property="og:title" content="Finch Architecture — AI Desktop Assistant & Agent Framework Design">
+<meta property="og:description" content="Finch architecture overview: Electron + TypeScript dual-process, Agent core, Skill system, permission control, memory system.">
 <meta property="og:image" content="https://finchwork.app/images/welcome.png">
-<meta property="og:url" content="https://finchwork.app/architecture.html">
+<meta property="og:url" content="https://finchwork.app/en/architecture.html">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --green: #2fa587;
-    --ivory: #f6f4ee;
-    --forest: #23312d;
-    --orange: #ff8a4c;
-    --cyan: #5fafc9;
-  }
+  :root { --green: #2fa587; --ivory: #f6f4ee; --forest: #23312d; --orange: #ff8a4c; --cyan: #5fafc9; }
   html { scroll-behavior: smooth; }
+  /* ---- Language Switcher ---- */
+  .lang-switcher {
+    position: fixed; top: 20px; right: 28px; z-index: 100;
+    display: flex; align-items: center; gap: 4px;
+    font-family: -apple-system, "PingFang SC", sans-serif; font-size: .82rem;
+  }
+  .lang-switcher a {
+    display: inline-flex; align-items: center;
+    padding: 4px 10px; border-radius: 8px;
+    color: rgba(35,49,45,.4); text-decoration: none; transition: all .2s ease;
+  }
+  .lang-switcher a:hover { color: #2fa587; background: rgba(47,165,135,.08); }
+  .lang-switcher a.active { color: #2fa587; font-weight: 600; }
+  .lang-switcher .sep { color: rgba(35,49,45,.15); }
+  @media (max-width: 700px) { .lang-switcher { top: 14px; right: 16px; } }
   body {
     font-family: "Georgia", "PingFang SC", serif;
-    background: var(--ivory);
-    color: var(--forest);
-    line-height: 1.8;
-    -webkit-font-smoothing: antialiased;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 60px 32px 100px;
+    background: var(--ivory); color: var(--forest);
+    line-height: 1.8; -webkit-font-smoothing: antialiased;
+    max-width: 800px; margin: 0 auto; padding: 60px 32px 100px;
   }
   a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  h1 {
-    font-family: "Georgia", "PingFang SC", serif;
-    font-size: clamp(2rem, 4vw, 2.6rem);
-    letter-spacing: -.03em;
-    margin-bottom: 12px;
-  }
-  .lead {
-    color: rgba(35,49,45,.45);
-    font-size: 1rem;
-    margin-bottom: 48px;
-  }
-  h2 {
-    font-family: "Georgia", "PingFang SC", serif;
-    font-size: 1.4rem;
-    margin-top: 48px;
-    margin-bottom: 12px;
-    color: var(--forest);
-  }
-  h3 {
-    font-family: "Georgia", "PingFang SC", serif;
-    font-size: 1.1rem;
-    margin-top: 28px;
-    margin-bottom: 8px;
-    color: var(--forest);
-  }
-  p {
-    color: rgba(35,49,45,.6);
-    margin-bottom: 16px;
-  }
-  .arch-block {
-    margin-bottom: 32px;
-    padding: 20px 24px;
-    border-radius: 14px;
-    background: rgba(255,255,255,.32);
-    border: 1px solid rgba(35,49,45,.06);
-  }
-  .arch-block h3 {
-    margin-top: 0;
-  }
-  .arch-block p {
-    margin-bottom: 6px;
-  }
-  .tag {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 999px;
-    background: rgba(47,165,135,.1);
-    color: var(--green);
-    font-size: .76rem;
-    font-weight: 600;
-    font-family: -apple-system, sans-serif;
-    margin-right: 6px;
-    margin-bottom: 6px;
-  }
-  .layer-diagram {
-    text-align: center;
-    margin: 40px 0;
-    font-family: -apple-system, "PingFang SC", monospace;
-  }
-  .layer-diagram .layer {
-    display: inline-block;
-    padding: 10px 28px;
-    border-radius: 10px;
-    margin: 4px;
-    font-size: .9rem;
-    font-weight: 600;
-  }
+  h1 { font-size: clamp(2rem, 4vw, 2.6rem); letter-spacing: -.03em; margin-bottom: 12px; }
+  .lead { color: rgba(35,49,45,.45); font-size: 1rem; margin-bottom: 48px; }
+  h2 { font-size: 1.4rem; margin-top: 48px; margin-bottom: 12px; color: var(--forest); }
+  h3 { font-size: 1.1rem; margin-top: 28px; margin-bottom: 8px; color: var(--forest); }
+  p { color: rgba(35,49,45,.6); margin-bottom: 16px; }
+  .arch-block { margin-bottom: 32px; padding: 20px 24px; border-radius: 14px; background: rgba(255,255,255,.32); border: 1px solid rgba(35,49,45,.06); }
+  .arch-block h3 { margin-top: 0; }
+  .arch-block p { margin-bottom: 6px; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 999px; background: rgba(47,165,135,.1); color: var(--green); font-size: .76rem; font-weight: 600; font-family: -apple-system, sans-serif; margin-right: 6px; margin-bottom: 6px; }
+  .layer-diagram { text-align: center; margin: 40px 0; font-family: -apple-system, "PingFang SC", monospace; }
+  .layer-diagram .layer { display: inline-block; padding: 10px 28px; border-radius: 10px; margin: 4px; font-size: .9rem; font-weight: 600; }
   .layer.main { background: rgba(47,165,135,.12); color: var(--green); }
   .layer.renderer { background: rgba(95,175,201,.12); color: var(--cyan); }
   .layer.core { background: rgba(255,138,76,.12); color: var(--orange); }
   .layer.base { background: rgba(35,49,45,.06); color: rgba(35,49,45,.5); }
   .layer-diagram .arrow { display: block; font-size: .8rem; color: rgba(35,49,45,.25); margin: 2px 0; }
-  hr {
-    border: none;
-    border-top: 1px solid rgba(35,49,45,.06);
-    margin: 48px 0;
-  }
-  .btn-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 36px;
-    background: var(--green);
-    color: #fff;
-    font-weight: 600;
-    font-size: .95rem;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all .3s ease;
-    font-family: -apple-system, "PingFang SC", sans-serif;
-  }
+  hr { border: none; border-top: 1px solid rgba(35,49,45,.06); margin: 48px 0; }
+  .btn-download { display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; background: var(--green); color: #fff; font-weight: 600; font-size: .95rem; border-radius: 12px; text-decoration: none; transition: all .3s ease; font-family: -apple-system, "PingFang SC", sans-serif; }
   .btn-download:hover { background: #279077; transform: translateY(-2px); text-decoration: none; }
-  @media (max-width: 700px) {
-    body { padding: 40px 20px 80px; }
-  }
+  @media (max-width: 700px) { body { padding: 40px 20px 80px; } }
 </style>
 </head>
 <body>
 
-<h1>Finch 技术架构</h1>
-<p class="lead">本地优先的 AI 桌面助手 — 架构概览</p>
+<div class="lang-switcher">
+  <a href="/architecture.html">中</a>
+  <span class="sep">/</span>
+  <a href="/en/architecture.html" class="active">EN</a>
+</div>
+
+<h1>Finch Architecture</h1>
+<p class="lead">Local-First AI Desktop Assistant — Architecture Overview</p>
 
 <div class="arch-block">
-  <p>Finch 采用 <strong>Electron 双进程架构</strong>，主进程负责 Agent 编排和系统操作，渲染进程提供用户界面。两者通过 IPC 通信，所有跨边界数据类型在共享层统一声明。</p>
+  <p>Finch uses an <strong>Electron dual-process architecture</strong>. The main process handles Agent orchestration and system operations; the renderer process provides the user interface. Communication happens over IPC, with all cross-boundary data types declared in a shared layer.</p>
 </div>
 
 <div class="layer-diagram">
-  <span class="layer renderer">渲染进程</span>
+  <span class="layer renderer">Renderer</span>
   <span class="arrow">⬇ IPC ⬆</span>
-  <span class="layer main">主进程</span>
+  <span class="layer main">Main Process</span>
   <span class="arrow">⬇ ⬆</span>
-  <span class="layer core">Agent 核心 (pi)</span>
+  <span class="layer core">Agent Core (pi)</span>
   <span class="arrow">⬇ ⬆</span>
-  <span class="layer base">Electron 运行时</span>
+  <span class="layer base">Electron Runtime</span>
 </div>
 
-<h2>进程分层</h2>
+<h2>Process Layers</h2>
 
-<h3>渲染进程</h3>
-<p>基于 React + TypeScript + Zustand 构建的桌面 UI。组件按功能域组织，通过 <code>desktopApi</code> 桥调用后端能力，不走 Node 直接 API。全局状态按领域拆分独立 Store。</p>
+<h3>Renderer</h3>
+<p>Desktop UI built with React + TypeScript + Zustand. Components are organized by domain, using the <code>desktopApi</code> bridge to call backend capabilities without direct Node API access. Global state is split into domain-specific stores.</p>
 
-<h3>主进程</h3>
-<p>服务的容器。所有业务逻辑（Agent 编排、文件 I/O、会话持久化、模型管理）以服务层形式组织在独立模块中。IPC 处理层保持薄层，仅作为路由转发。</p>
+<h3>Main Process</h3>
+<p>The service container. All business logic — Agent orchestration, file I/O, session persistence, model management — is organized into independent service modules. The IPC handler layer stays thin, acting only as a router.</p>
 
-<h3>Agent 核心</h3>
-<p>运行在 <code>~/.finch/pi/</code> 目录下，管理会话生命周期、工具调度、模型通信。以 JSONL 格式持久化会话记录，按工作目录切分存储。</p>
+<h3>Agent Core</h3>
+<p>Runs in <code>~/.finch/pi/</code>, managing session lifecycle, tool dispatch, and model communication. Sessions are persisted in JSONL format, organized by working directory.</p>
 
-<h2>关键子系统</h2>
-
-<div class="arch-block">
-  <h3>Agent Runner（Agent 运行器）</h3>
-  <p>接收用户输入，调用大模型生成响应，编排工具执行。支持流式输出和后台任务。每次运行独立上下文，终态不互相覆盖。</p>
-  <span class="tag">流式响应</span>
-  <span class="tag">工具编排</span>
-  <span class="tag">后台任务</span>
-</div>
+<h2>Key Subsystems</h2>
 
 <div class="arch-block">
-  <h3>Memory System（记忆系统）</h3>
-  <p>分层记忆架构：短期记忆注入会话上下文、中期记忆提炼项目摘要、长期记忆归档日常日志。自动蒸馏机制定期压缩和淘汰低价值内容。</p>
-  <span class="tag">分层记忆</span>
-  <span class="tag">自动蒸馏</span>
-  <span class="tag">容量控制</span>
+  <h3>Agent Runner</h3>
+  <p>Accepts user input, calls LLMs for responses, orchestrates tool execution. Supports streaming output and background tasks. Each run has an independent context with no cross-contamination between final states.</p>
+  <span class="tag">Streaming</span>
+  <span class="tag">Tool Orchestration</span>
+  <span class="tag">Background Tasks</span>
 </div>
 
 <div class="arch-block">
-  <h3>Skill System（能力框架）</h3>
-  <p>将 AI 的能力封装为可注册、可触发的技能模块。每个 Skill 包含触发规则、执行上下文、权限声明。当前内置文档处理、PDF 编辑、PPT 制作、前端设计、问卷调查等。</p>
-  <span class="tag">插件化</span>
-  <span class="tag">触发匹配</span>
-  <span class="tag">可扩展</span>
+  <h3>Memory System</h3>
+  <p>Layered memory architecture: short-term memory injected into session context, medium-term memory summarizes project patterns, long-term memory archives daily logs. An auto-distillation mechanism periodically compresses and evicts low-value content.</p>
+  <span class="tag">Layered Memory</span>
+  <span class="tag">Auto Distillation</span>
+  <span class="tag">Capacity Control</span>
 </div>
 
 <div class="arch-block">
-  <h3>Permission System（权限系统）</h3>
-  <p>三级权限模式：Ask（逐次确认）、Accept Edits（自动编辑）、Developer（开发者模式）。文件操作和受信命令自动放行，高危操作二次确认，支持批量拒绝。</p>
-  <span class="tag">分级控制</span>
-  <span class="tag">安全沙箱</span>
-  <span class="tag">路径拦截</span>
+  <h3>Skill System</h3>
+  <p>Encapsulates AI capabilities into registrable, triggerable skill modules. Each Skill defines trigger rules, execution context, and permission declarations. Built-in skills include document processing, PDF editing, PPT creation, front-end design, and surveys.</p>
+  <span class="tag">Plugin Architecture</span>
+  <span class="tag">Trigger Matching</span>
+  <span class="tag">Extensible</span>
 </div>
 
 <div class="arch-block">
-  <h3>Model Layer（模型接入层）</h3>
-  <p>统一的模型接入抽象层，兼容 OpenAI API 协议。支持 Anthropic Claude、OpenAI GPT、Ollama 本地模型，以及任何兼容 OpenAI 协议的第三方服务。模型配置持久化存储。</p>
-  <span class="tag">多后端</span>
-  <span class="tag">统一接口</span>
-  <span class="tag">本地/云端</span>
+  <h3>Permission System</h3>
+  <p>Three-level permission model: Ask (confirm each action), Accept Edits (auto-approve), Developer (full access). File operations and trusted commands are auto-approved; high-risk operations require double confirmation. Supports batch reject.</p>
+  <span class="tag">Granular Control</span>
+  <span class="tag">Sandbox</span>
+  <span class="tag">Path Filtering</span>
 </div>
 
 <div class="arch-block">
-  <h3>Session Management（会话管理）</h3>
-  <p>按工作目录管理会话，JSONL 格式持久化。支持多窗口并发查看同一会话，运行状态在窗口间实时广播。会话可恢复、可搜索。</p>
-  <span class="tag">多窗口</span>
-  <span class="tag">实时同步</span>
-  <span class="tag">持久化</span>
+  <h3>Model Layer</h3>
+  <p>Unified model abstraction layer compatible with the OpenAI API protocol. Supports Anthropic Claude, OpenAI GPT, Ollama local models, and any third-party service that implements the OpenAI protocol. Model configuration is persisted locally.</p>
+  <span class="tag">Multi-Backend</span>
+  <span class="tag">Unified Interface</span>
+  <span class="tag">Local/Cloud</span>
+</div>
+
+<div class="arch-block">
+  <h3>Session Management</h3>
+  <p>Sessions are organized by working directory and persisted in JSONL format. Supports multi-window concurrent viewing of the same session, with real-time status broadcasting across windows. Sessions are resumable and searchable.</p>
+  <span class="tag">Multi-Window</span>
+  <span class="tag">Real-Time Sync</span>
+  <span class="tag">Persistent</span>
 </div>
 
 <hr>
 
-<h2>数据与运行时</h2>
-<p>所有运行时数据存储在用户目录下的 <code>~/.finch/</code> 中，包括 Agent 核心数据、会话记录、模型配置和工作区状态。不依赖外部服务，本地优先运行。</p>
-
-<p>跨平台支持 macOS（ARM64 / Intel）和 Windows（64位 / 32位），通过 Electron 的跨平台能力实现一次构建多端发布。</p>
+<h2>Runtime & Data</h2>
+<p>All runtime data is stored in <code>~/.finch/</code>, including Agent core data, session records, model configuration, and workspace state. No external service dependency — fully local-first.</p>
+<p>Cross-platform support for macOS (ARM64 / Intel) and Windows (64-bit / 32-bit), leveraging Electron's cross-platform capabilities for build-once, deploy-everywhere.</p>
 
 <hr>
 
 <div style="text-align:center; margin-top: 40px;">
-  <a href="index.html" class="btn-download">回到首页下载 Finch</a>
+  <a href="index.html" class="btn-download">Download Finch</a>
 </div>
 
 </body>
