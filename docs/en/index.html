@@ -927,6 +927,47 @@ Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supporte
 
 <script>
 (() => {
+  // 语言检测和自动跳转
+  const detectAndRedirectLanguage = () => {
+    // 如果已经在中文页面，不需要检测
+    if (!window.location.pathname.startsWith('/en/')) {
+      return;
+    }
+
+    // 检测用户语言偏好
+    const userLang = navigator.language || navigator.userLanguage || '';
+    const acceptLang = navigator.languages || [userLang];
+
+    // 检查是否偏好中文
+    const prefersChinese = acceptLang.some(lang => {
+      const langLower = lang.toLowerCase();
+      return langLower.startsWith('zh') || langLower === 'zh-cn' || langLower === 'zh-tw';
+    });
+
+    // 如果用户偏好中文且当前在英文页面，跳转到中文版
+    if (prefersChinese && window.location.pathname.startsWith('/en/')) {
+      const currentPath = window.location.pathname;
+      const currentSearch = window.location.search;
+      const currentHash = window.location.hash;
+
+      // 构建中文版 URL
+      let chinesePath;
+      if (currentPath === '/en/' || currentPath === '/en') {
+        chinesePath = '/';
+      } else if (currentPath.startsWith('/en/')) {
+        chinesePath = currentPath.replace(/^\/en\//, '/');
+      } else {
+        chinesePath = currentPath;
+      }
+
+      window.location.href = chinesePath + currentSearch + currentHash;
+    }
+  };
+
+  // 执行语言检测
+  detectAndRedirectLanguage();
+
+  // 平台检测逻辑
   const wraps = Array.from(document.querySelectorAll('.cta .btn-wrap'));
   const byPlatform = new Map(wraps.map((wrap) => [wrap.dataset.platform, wrap]));
 
