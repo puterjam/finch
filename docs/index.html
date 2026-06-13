@@ -925,87 +925,9 @@ Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog Pute
 
 <footer>Finch — 以自然的方式使用 AI</footer>
 
+<script src="js/i18n.js"></script>
 <script>
 (() => {
-  // 语言检测和自动跳转
-  const detectAndRedirectLanguage = () => {
-    // 如果已经在英文页面，不需要检测
-    if (window.location.pathname.startsWith('/en/')) {
-      return;
-    }
-
-    // 检查用户是否手动选择过语言（通过 localStorage）
-    const manualLanguageChoice = localStorage.getItem('finch-language-preference');
-    if (manualLanguageChoice === 'en') {
-      // 用户手动选择了英文，跳转到英文版
-      const currentPath = window.location.pathname;
-      const currentSearch = window.location.search;
-      const currentHash = window.location.hash;
-
-      let englishPath;
-      if (currentPath === '/' || currentPath === '' || currentPath === '/index.html') {
-        englishPath = '/en/';
-      } else if (currentPath.endsWith('.html')) {
-        englishPath = '/en/' + currentPath.replace(/^\//, '');
-      } else {
-        englishPath = '/en/' + currentPath.replace(/^\//, '');
-      }
-
-      window.location.href = englishPath + currentSearch + currentHash;
-      return;
-    }
-
-    // 如果用户手动选择了中文，不进行自动跳转
-    if (manualLanguageChoice === 'zh') {
-      return;
-    }
-
-    // 检测用户语言偏好
-    const userLang = navigator.language || navigator.userLanguage || '';
-    const acceptLang = navigator.languages || [userLang];
-
-    // 检查是否偏好英文
-    const prefersEnglish = acceptLang.some(lang => {
-      const langLower = lang.toLowerCase();
-      return langLower.startsWith('en') || langLower === 'en-us' || langLower === 'en-gb';
-    });
-
-    // 如果用户偏好英文且当前在中文页面，跳转到英文版
-    if (prefersEnglish && !window.location.pathname.startsWith('/en/')) {
-      const currentPath = window.location.pathname;
-      const currentSearch = window.location.search;
-      const currentHash = window.location.hash;
-
-      // 构建英文版 URL
-      let englishPath;
-      if (currentPath === '/' || currentPath === '' || currentPath === '/index.html') {
-        englishPath = '/en/';
-      } else if (currentPath.endsWith('.html')) {
-        englishPath = '/en/' + currentPath.replace(/^\//, '');
-      } else {
-        englishPath = '/en/' + currentPath.replace(/^\//, '');
-      }
-
-      window.location.href = englishPath + currentSearch + currentHash;
-    }
-  };
-
-  // 执行语言检测
-  detectAndRedirectLanguage();
-
-  // 监听语言切换器的点击，记录用户的手动选择
-  document.addEventListener('click', (e) => {
-    const langLink = e.target.closest('.lang-switcher a');
-    if (langLink) {
-      const href = langLink.getAttribute('href');
-      if (href === '/en/' || href.startsWith('/en/')) {
-        localStorage.setItem('finch-language-preference', 'en');
-      } else {
-        localStorage.setItem('finch-language-preference', 'zh');
-      }
-    }
-  });
-
   // 平台检测逻辑
   const wraps = Array.from(document.querySelectorAll('.cta .btn-wrap'));
   const byPlatform = new Map(wraps.map((wrap) => [wrap.dataset.platform, wrap]));
