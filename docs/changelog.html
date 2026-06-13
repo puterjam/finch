@@ -167,6 +167,45 @@
 <h1>更新日志</h1>
 <p>Finch 的每一次成长，都在这里记录。</p>
 
+<!-- ====== 1.4.3 ====== -->
+<div class="version">
+  <h2>1.4.3</h2>
+  <p class="date">2026-06-13</p>
+
+  <h3>新增</h3>
+  <ul>
+    <li><strong>自动化任务管理</strong>：全新自动化引擎，支持定时执行（小时/日/工作日/周/Cron）、模型选择、推理等级、执行历史记录；Schedule 工具集成；全链路 IPC + 前端 UI（TaskView/AutomationDialog/AutomationPanel）</li>
+    <li><strong>网络设置面板</strong>：新增网络页，支持直连/系统代理/自定义代理配置与连通性测试；OAuth 登录优先系统浏览器，回退内嵌窗口；系统代理窗口获焦自动重检测</li>
+    <li><strong>多语言国际化</strong>：会话区域、快捷鍵对话框、侧栏、Composer、设置页全面 i18n 中英文翻译</li>
+    <li><strong>托盘菜单 & 状态角标</strong>：macOS 托盘菜单（新对话/设置/退出），运行/等待/未读状态动画角标</li>
+    <li><strong>模型分级选择</strong>：支持 Quick 快速对话模型，defaultReasoningEffort 智能分配推理等级</li>
+    <li><strong>新增模型</strong>：新增 Kimi 2.7, MiniMax 3.0, GLM 5.2, Fable 5</li>
+    <li><strong>好玩的个性化功能</strong>：到设置界面里看看吧</li>
+  </ul>
+
+  <h3>优化</h3>
+  <ul>
+    <li><strong>统一设计语言重构</strong>：Finch UI 重新设计，体验更一致了</li>
+    <li><strong>空间选择器重构</strong>：SpaceMenu 拆分为 SpacePicker（UI）和 SpaceMenu（工具模式）</li>
+    <li><strong>侧栏 UI 状态持久化</strong>：侧栏 tab/展开/收起/钉住等状态统一持久化到 workspace.json，支持跨窗口恢复</li>
+    <li><strong>模型配置默认推理等级</strong>：Fable 5 默认 low，Opus 默认 medium，更合理默认值</li>
+    <li><strong>OAuth 兼容性</strong>：OAuth 登录走应用代理，成功/失败均显示返回 Finch 按钮</li>
+    <li><strong>推流体验优化</strong>：减少系统资源占用，优化推流性能，提升响应速度</li>
+  </ul>
+
+  <h3>修复</h3>
+  <ul>
+    <li>修复 sideBar 状态持久化恢复失效（workspace.json 漏读 sidebarUiState）</li>
+    <li>修复紧凑模式左栏宽度恢复与展开收起动画</li>
+    <li>修复悬浮左栏遮盖内容与 z-index 层级</li>
+    <li>修复发送消息后侧栏会话时间未乐观更新</li>
+    <li>修复 batch-edit 格式下 edits[] 空 old_string 遮蔽 diff 内容</li>
+    <li>修复结束后复制工具条缺失</li>
+    <li>修复工具超时中断会话</li>
+    <li>修复系统语言识别与会话模型切换</li>
+  </ul>
+</div>
+
 <!-- ====== 1.4.2 ====== -->
 <div class="version">
   <h2>1.4.2</h2>
@@ -407,6 +446,50 @@
     <li>macOS DMG 安装包，支持 Retina 背景图与自动版本号同步</li>
   </ul>
 </div>
+
+<script>
+(() => {
+  // 语言检测和自动跳转
+  const detectAndRedirectLanguage = () => {
+    // 如果已经在英文页面，不需要检测
+    if (window.location.pathname.startsWith('/en/')) {
+      return;
+    }
+
+    // 检测用户语言偏好
+    const userLang = navigator.language || navigator.userLanguage || '';
+    const acceptLang = navigator.languages || [userLang];
+
+    // 检查是否偏好英文
+    const prefersEnglish = acceptLang.some(lang => {
+      const langLower = lang.toLowerCase();
+      return langLower.startsWith('en') || langLower === 'en-us' || langLower === 'en-gb';
+    });
+
+    // 如果用户偏好英文且当前在中文页面，跳转到英文版
+    if (prefersEnglish && !window.location.pathname.startsWith('/en/')) {
+      const currentPath = window.location.pathname;
+      const currentSearch = window.location.search;
+      const currentHash = window.location.hash;
+
+      // 构建英文版 URL
+      let englishPath;
+      if (currentPath === '/' || currentPath === '' || currentPath === '/index.html') {
+        englishPath = '/en/';
+      } else if (currentPath.endsWith('.html')) {
+        englishPath = '/en/' + currentPath.replace(/^\//, '');
+      } else {
+        englishPath = '/en/' + currentPath.replace(/^\//, '');
+      }
+
+      window.location.href = englishPath + currentSearch + currentHash;
+    }
+  };
+
+  // 执行语言检测
+  detectAndRedirectLanguage();
+})();
+</script>
 
 </body>
 </html>

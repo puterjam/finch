@@ -69,6 +69,45 @@
 <h1>Changelog</h1>
 <p>Every step of Finch's growth, recorded here.</p>
 
+<!-- ====== 1.4.3 ====== -->
+<div class="version">
+  <h2>1.4.3</h2>
+  <p class="date">2026-06-13</p>
+
+  <h3>New</h3>
+  <ul>
+    <li><strong>Automation Task Management</strong>: New automation engine with scheduled execution (hourly/daily/weekday/weekly/Cron), model selection, reasoning level, execution history; Schedule tool integration; full IPC + frontend UI (TaskView/AutomationDialog/AutomationPanel)</li>
+    <li><strong>Network Settings Panel</strong>: New network page with direct/system/custom proxy configuration and connectivity testing; OAuth login prefers system browser with embedded window fallback; system proxy window auto-redetects on focus</li>
+    <li><strong>Multi-Language i18n</strong>: Full i18n for session area, shortcuts dialog, sidebar, Composer, and settings page (Chinese/English)</li>
+    <li><strong>Tray Menu & Status Badge</strong>: macOS tray menu (new conversation/settings/quit), animated status badges for running/waiting/unread states</li>
+    <li><strong>Model Tier Selection</strong>: Quick fast-chat model support, defaultReasoningEffort intelligent assignment</li>
+    <li><strong>New Models</strong>: Added Kimi 2.7, MiniMax 3.0, GLM 5.2, Fable 5</li>
+    <li><strong>Fun Personalization</strong>: Check out the settings page for fun personalization features</li>
+  </ul>
+
+  <h3>Optimization</h3>
+  <ul>
+    <li><strong>Unified Design Language</strong>: Finch UI redesigned for a more consistent experience</li>
+    <li><strong>Space Selector Refactor</strong>: SpaceMenu split into SpacePicker (UI) and SpaceMenu (tool mode)</li>
+    <li><strong>Sidebar UI State Persistence</strong>: Sidebar tab/expand/collapse/pin states persisted to workspace.json, cross-window recovery</li>
+    <li><strong>Model Default Reasoning Level</strong>: Fable 5 defaults to low, Opus defaults to medium</li>
+    <li><strong>OAuth Compatibility</strong>: OAuth login uses app proxy, shows return-to-Finch button on success/failure</li>
+    <li><strong>Streaming Experience</strong>: Reduced system resource usage, optimized streaming performance, improved responsiveness</li>
+  </ul>
+
+  <h3>Fixes</h3>
+  <ul>
+    <li>Fixed sidebar state persistence recovery failure (workspace.json missing sidebarUiState read)</li>
+    <li>Fixed compact mode left column width recovery and expand/collapse animation</li>
+    <li>Fixed floating left column covering content and z-index layering</li>
+    <li>Fixed sidebar session time not optimistically updated after sending message</li>
+    <li>Fixed batch-edit format edits[] empty old_string masking diff content</li>
+    <li>Fixed copy toolbar missing after completion</li>
+    <li>Fixed tool timeout interrupting session</li>
+    <li>Fixed system language recognition and session model switching</li>
+  </ul>
+</div>
+
 <!-- ====== 1.4.2 ====== -->
 <div class="version">
   <h2>1.4.2</h2>
@@ -207,6 +246,50 @@
     <li>macOS DMG installer with Retina support</li>
   </ul>
 </div>
+
+<script>
+(() => {
+  // Language detection and auto-redirect
+  const detectAndRedirectLanguage = () => {
+    // If already on Chinese page, no need to detect
+    if (!window.location.pathname.startsWith('/en/')) {
+      return;
+    }
+
+    // Detect user language preference
+    const userLang = navigator.language || navigator.userLanguage || '';
+    const acceptLang = navigator.languages || [userLang];
+
+    // Check if user prefers Chinese
+    const prefersChinese = acceptLang.some(lang => {
+      const langLower = lang.toLowerCase();
+      return langLower.startsWith('zh') || langLower === 'zh-cn' || langLower === 'zh-tw';
+    });
+
+    // If user prefers Chinese and currently on English page, redirect to Chinese version
+    if (prefersChinese && window.location.pathname.startsWith('/en/')) {
+      const currentPath = window.location.pathname;
+      const currentSearch = window.location.search;
+      const currentHash = window.location.hash;
+
+      // Build Chinese version URL
+      let chinesePath;
+      if (currentPath === '/en/' || currentPath === '/en') {
+        chinesePath = '/';
+      } else if (currentPath.startsWith('/en/')) {
+        chinesePath = currentPath.replace(/^\/en\//, '/');
+      } else {
+        chinesePath = currentPath;
+      }
+
+      window.location.href = chinesePath + currentSearch + currentHash;
+    }
+  };
+
+  // Execute language detection
+  detectAndRedirectLanguage();
+})();
+</script>
 
 </body>
 </html>
