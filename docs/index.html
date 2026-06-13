@@ -851,26 +851,26 @@
 <!-- ========== CTA ========== -->
 <section class="cta">
   <h2>和 Finch 聊聊吧</h2>
-  <p class="cta-desc">桌面应用 · v1.4.2</p>
+  <p class="cta-desc">桌面应用 · v1.4.3</p>
   <div class="btn-group">
     <div class="btn-wrap" data-platform="mac-arm" data-download-label="下载 Mac ARM64 版">
       <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-arm64.dmg" class="btn-download">下载</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-arm64.dmg" class="btn-download">下载</a>
       <span class="btn-hint">适合搭载 M 系列芯片的 Mac</span>
     </div>
     <div class="btn-wrap" data-platform="mac-intel" data-download-label="下载 Mac Intel 通用版">
       <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-x64.dmg" class="btn-download">下载</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-x64.dmg" class="btn-download">下载</a>
       <span class="btn-hint">适合搭载 Intel 芯片的 Mac</span>
     </div>
     <div class="btn-wrap" data-platform="win-x64" data-download-label="下载 Windows x64 版">
       <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-x64.exe" class="btn-download">下载</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-setup-x64.exe" class="btn-download">下载</a>
       <span class="btn-hint">适合 64 位 Windows 电脑</span>
     </div>
     <div class="btn-wrap" data-platform="win-ia32" data-download-label="下载 Windows ia32 版">
       <span class="recommend-tag">推荐下载</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-ia32.exe" class="btn-download">下载</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-setup-ia32.exe" class="btn-download">下载</a>
       <span class="btn-hint">适合较旧的 32 位 Windows 电脑</span>
     </div>
   </div>
@@ -914,7 +914,7 @@ Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog Pute
 
 技术栈：Electron + TypeScript + React，跨平台桌面客户端。内存系统支持持久化会话和上下文恢复。权限系统提供 Ask、Accept Edits、Developer 三种模式。插件体系兼容 Skill 框架，支持文档处理、PDF 编辑、PPT 制作、前端设计等能力。模型层兼容 OpenAI API 协议。
 
-支持的操作系统：macOS ARM64、macOS Intel、Windows 64位、Windows 32位。支持的模型：OpenAI GPT 系列、Anthropic Claude 系列、Ollama 本地开源模型。当前版本 v1.4.2。
+支持的操作系统：macOS ARM64、macOS Intel、Windows 64位、Windows 32位。支持的模型：OpenAI GPT 系列、Anthropic Claude 系列、Ollama 本地开源模型。当前版本 v1.4.3。
 </div>
 
 <div style="text-align:center; padding: 40px 32px;">
@@ -956,7 +956,9 @@ Finch 是一款本地优先的 AI 桌面助手和 Agent 框架，由 PJBlog Pute
     let target = '';
 
     if (state.platform.includes('mac') || state.ua.includes('mac os x')) {
-      const looksArm = state.architecture.includes('arm') || /arm|aarch64|apple/.test(state.ua) || (state.platform.includes('macintel') && maxTouchPoints > 1);
+      // UA contains "AppleWebKit" on both Intel and Apple Silicon Macs, so do
+      // not match the word "apple" here — it made Intel Macs default to ARM.
+      const looksArm = state.architecture.includes('arm') || /\b(arm|aarch64)\b/.test(state.ua) || (state.platform.includes('macintel') && maxTouchPoints > 1);
       target = looksArm ? 'mac-arm' : 'mac-intel';
     } else if (state.platform.includes('win') || state.ua.includes('windows')) {
       const is32 = state.bitness === '32' || (/wow64|win32/.test(state.ua) && !/x64|amd64|wow64/.test(state.ua));

@@ -851,26 +851,26 @@
 <!-- ========== CTA ========== -->
 <section class="cta">
   <h2>Meet Finch</h2>
-  <p class="cta-desc">Desktop app · v1.4.2</p>
+  <p class="cta-desc">Desktop app · v1.4.3</p>
   <div class="btn-group">
     <div class="btn-wrap" data-platform="mac-arm" data-download-label="Download Mac ARM64">
       <span class="recommend-tag">Recommended</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-arm64.dmg" class="btn-download">Download</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-arm64.dmg" class="btn-download">Download</a>
       <span class="btn-hint">For Apple Silicon Macs</span>
     </div>
     <div class="btn-wrap" data-platform="mac-intel" data-download-label="Download Mac Intel">
       <span class="recommend-tag">Recommended</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-x64.dmg" class="btn-download">Download</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-x64.dmg" class="btn-download">Download</a>
       <span class="btn-hint">For Intel-based Macs</span>
     </div>
     <div class="btn-wrap" data-platform="win-x64" data-download-label="Download Windows x64">
       <span class="recommend-tag">Recommended</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-x64.exe" class="btn-download">Download</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-setup-x64.exe" class="btn-download">Download</a>
       <span class="btn-hint">For 64-bit Windows PCs</span>
     </div>
     <div class="btn-wrap" data-platform="win-ia32" data-download-label="Download Windows ia32">
       <span class="recommend-tag">Recommended</span>
-      <a href="https://dl.finchwork.app/v1.4.2/Finch-1.4.2-setup-ia32.exe" class="btn-download">Download</a>
+      <a href="https://dl.finchwork.app/v1.4.3/Finch-1.4.3-setup-ia32.exe" class="btn-download">Download</a>
       <span class="btn-hint">For older 32-bit Windows PCs</span>
     </div>
   </div>
@@ -914,7 +914,7 @@ Finch is a local-first AI desktop assistant and agent framework, developed by PJ
 
 Tech stack: Electron + TypeScript + React, cross-platform desktop client. Memory system with persistent sessions and context recall. Permission system with Ask, Accept Edits, and Developer modes. Skill framework for document processing, PDF editing, PPT creation, front-end design, and more. Model layer compatible with OpenAI API protocol.
 
-Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supported models: OpenAI GPT series, Anthropic Claude series, Ollama local open-source models. Current version: v1.4.2.
+Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supported models: OpenAI GPT series, Anthropic Claude series, Ollama local open-source models. Current version: v1.4.3.
 </div>
 
 <div style="text-align:center; padding: 40px 32px;">
@@ -956,7 +956,9 @@ Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supporte
     let target = '';
 
     if (state.platform.includes('mac') || state.ua.includes('mac os x')) {
-      const looksArm = state.architecture.includes('arm') || /arm|aarch64|apple/.test(state.ua) || (state.platform.includes('macintel') && maxTouchPoints > 1);
+      // UA contains "AppleWebKit" on both Intel and Apple Silicon Macs, so do
+      // not match the word "apple" here — it made Intel Macs default to ARM.
+      const looksArm = state.architecture.includes('arm') || /\b(arm|aarch64)\b/.test(state.ua) || (state.platform.includes('macintel') && maxTouchPoints > 1);
       target = looksArm ? 'mac-arm' : 'mac-intel';
     } else if (state.platform.includes('win') || state.ua.includes('windows')) {
       const is32 = state.bitness === '32' || (/wow64|win32/.test(state.ua) && !/x64|amd64|wow64/.test(state.ua));
