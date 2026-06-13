@@ -934,6 +934,33 @@ Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supporte
       return;
     }
 
+    // 检查用户是否手动选择过语言（通过 localStorage）
+    const manualLanguageChoice = localStorage.getItem('finch-language-preference');
+    if (manualLanguageChoice === 'zh') {
+      // 用户手动选择了中文，跳转到中文版
+      const currentPath = window.location.pathname;
+      const currentSearch = window.location.search;
+      const currentHash = window.location.hash;
+
+      // 构建中文版 URL
+      let chinesePath;
+      if (currentPath === '/en/' || currentPath === '/en') {
+        chinesePath = '/';
+      } else if (currentPath.startsWith('/en/')) {
+        chinesePath = currentPath.replace(/^\/en\//, '/');
+      } else {
+        chinesePath = currentPath;
+      }
+
+      window.location.href = chinesePath + currentSearch + currentHash;
+      return;
+    }
+
+    // 如果用户手动选择了英文，不进行自动跳转
+    if (manualLanguageChoice === 'en') {
+      return;
+    }
+
     // 检测用户语言偏好
     const userLang = navigator.language || navigator.userLanguage || '';
     const acceptLang = navigator.languages || [userLang];
@@ -966,6 +993,19 @@ Supported OS: macOS ARM64, macOS Intel, Windows 64-bit, Windows 32-bit. Supporte
 
   // 执行语言检测
   detectAndRedirectLanguage();
+
+  // 监听语言切换器的点击，记录用户的手动选择
+  document.addEventListener('click', (e) => {
+    const langLink = e.target.closest('.lang-switcher a');
+    if (langLink) {
+      const href = langLink.getAttribute('href');
+      if (href === '/en/' || href.startsWith('/en/')) {
+        localStorage.setItem('finch-language-preference', 'en');
+      } else {
+        localStorage.setItem('finch-language-preference', 'zh');
+      }
+    }
+  });
 
   // 平台检测逻辑
   const wraps = Array.from(document.querySelectorAll('.cta .btn-wrap'));
