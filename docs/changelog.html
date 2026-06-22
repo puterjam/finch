@@ -167,6 +167,39 @@
 <h1>更新日志</h1>
 <p>Finch 的每一次成长，都在这里记录。</p>
 
+<!-- ====== 1.4.4 ====== -->
+<div class="version">
+  <h2>1.4.4</h2>
+  <p class="date">2026-06-22</p>
+
+  <h3>新增</h3>
+  <ul>
+    <li><strong>完善 Skill 系统</strong>：全新 Skill 页面与路由，支持技能浏览、搜索、安装与创建；技能扫描器支持 YAML block scalar 多行描述解析；侧栏新增技能入口与键盘导航</li>
+    <li><strong>导航历史与多窗口恢复</strong>：多窗口状态恢复、手势导航接入、Composer 输入状态管理、草稿持久化</li>
+    <li><strong>Rich Composer &amp; @mention</strong>：富文本输入框，@mention 弹框智能搜索文件/空间/技能，粘贴后自动触发检测</li>
+    <li><strong>空间自定义图标与配色</strong>：每个空间可独立设置图标与颜色，右键菜单一键配置；AppCall 建空间时直接指定</li>
+    <li><strong>图片预览模态框</strong>：AttachmentChips 点击大图预览，ModalShell 支持 backdropOnly 模式</li>
+    <li><strong>PDF 直接读取</strong>：Read/Grep 工具支持 PDF 文本提取、目录、链接与大小限制，按页读取；PDF 缓存带 20 分钟 TTL 自动释放</li>
+    <li><strong>允许保持系统唤醒</strong>：接电时 prevent-display-sleep 防合盖断网，电池时保持省电</li>
+    <li><strong>自动化任务拖放排序</strong>：支持拖拽调整自动化任务顺序</li>
+    <li><strong>发行版下载代理</strong>：改用 dl.finchwork.app 加速更新下载</li>
+  </ul>
+
+  <h3>优化</h3>
+  <ul>
+    <li><strong>Skills 路径重构</strong>：skills/ → .finch/skills/；新增 listUsableSkills 统一运行时入口；优先级调整为 additional &gt; project</li>
+    <li><strong>Composer 选择器重构</strong>：SpacePicker/ModelPicker/PermissionModePicker 统一使用 Button/Menu 组件，移除旧样式依赖</li>
+    <li><strong>i18n 补全</strong>：Skill、自动化、Mention 等场景完整中英文文案</li>
+    <li><strong>表格渲染优化</strong>：表格宽度改为 100%，底部阴影对齐</li>
+    <li><strong>CSS token 统一</strong>：Button、Kbd、ListRow、OptionCard 等组件 token 对齐</li>
+    <li><strong>代码块折叠优化</strong>：行数级判断，折叠态只渲染前 36 行</li>
+    <li><strong>路径缩略显示</strong>：侧栏空间路径格式化为 ~/…/aeolus/finch</li>
+    <li><strong>finch-tools 拆分</strong>：工具描述、行为规则、参数定义分文件管理</li>
+    <li><strong>Windows 路径适配</strong>：Windows 下 PermissionMode 规范化处理</li>
+    <li><strong>过程小结引导</strong>：Agent 在多工具/循环任务中按 Plan/Found/Next 同步进度</li>
+  </ul>
+</div>
+
 <!-- ====== 1.4.3 ====== -->
 <div class="version">
   <h2>1.4.3</h2>

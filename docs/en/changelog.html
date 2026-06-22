@@ -69,6 +69,39 @@
 <h1>Changelog</h1>
 <p>Every step of Finch's growth, recorded here.</p>
 
+<!-- ====== 1.4.4 ====== -->
+<div class="version">
+  <h2>1.4.4</h2>
+  <p class="date">2026-06-22</p>
+
+  <h3>New</h3>
+  <ul>
+    <li><strong>Skill System Revamped</strong>: New Skill page and routes for browsing, searching, installing, and creating skills; YAML block scalar multi-line description parsing; skill entry in sidebar with keyboard navigation</li>
+    <li><strong>Navigation History &amp; Multi-Window Recovery</strong>: Multi-window state restoration, gesture navigation, Composer input state management, draft persistence</li>
+    <li><strong>Rich Composer &amp; @mention</strong>: Rich text input box, @mention popover for smart file/space/skill search, paste detection</li>
+    <li><strong>Custom Space Icons &amp; Colors</strong>: Each space can have its own icon and color, configurable via right-click menu or AppCall during creation</li>
+    <li><strong>Image Preview Modal</strong>: Click to preview images full-size in ModalShell with backdropOnly support</li>
+    <li><strong>PDF Direct Reading</strong>: Read/Grep tools now support PDF text extraction, table of contents, links, and size limits with 20-min TTL cache</li>
+    <li><strong>Prevent System Sleep</strong>: Keep display on while plugged in, preserve battery on power</li>
+    <li><strong>Automation Task Drag &amp; Sort</strong>: Reorder automation tasks by dragging</li>
+    <li><strong>Download Proxy</strong>: Switched to dl.finchwork.app for faster update downloads</li>
+  </ul>
+
+  <h3>Optimization</h3>
+  <ul>
+    <li><strong>Skills Path Restructure</strong>: skills/ → .finch/skills/; new listUsableSkills runtime entry; precedence changed to additional &gt; project</li>
+    <li><strong>Composer Selector Refactor</strong>: SpacePicker/ModelPicker/PermissionModePicker unified with Button/Menu components, removed legacy styles</li>
+    <li><strong>i18n Completion</strong>: Full Chinese/English translations for Skill, Automation, Mention, and more</li>
+    <li><strong>Table Rendering</strong>: Table width changed to 100%, bottom shadow alignment fix</li>
+    <li><strong>CSS Token Unification</strong>: Button, Kbd, ListRow, OptionCard and other components aligned</li>
+    <li><strong>Code Block Collapse</strong>: Line-count based, collapsed state renders only first 36 lines</li>
+    <li><strong>Path Truncation</strong>: Sidebar space paths display as ~/…/aeolus/finch</li>
+    <li><strong>finch-tools Split</strong>: Tool descriptions, behavior rules, and parameter definitions in separate files</li>
+    <li><strong>Windows Path Adaptation</strong>: PermissionMode normalization for Windows</li>
+    <li><strong>Progress Summary Guidance</strong>: Agent syncs progress via Plan/Found/Next in multi-tool tasks</li>
+  </ul>
+</div>
+
 <!-- ====== 1.4.3 ====== -->
 <div class="version">
   <h2>1.4.3</h2>
