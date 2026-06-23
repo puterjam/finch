@@ -1,0 +1,21 @@
+{
+  "name": "@finch.app/plugins",
+  "version": "0.1.0",
+  "description": "CLI shim for installing Finch plugins to the correct location.",
+  "type": "module",
+  "bin": {
+    "finch-plugins": "bin/plugins.mjs"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "license": "MIT"
+}

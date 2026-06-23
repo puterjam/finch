@@ -1,0 +1,17 @@
+{
+  "name": "@finch/plugin-api",
+  "version": "0.1.0",
+  "description": "Finch Plugin API — type contract for Finch plugin authors. Zero runtime dependencies.",
+  "type": "module",
+  "exports": {
+    ".": "./index.d.ts",
+    "./finch": "./finch.d.ts"
+  },
+  "types": "index.d.ts",
+  "private": true,
+  "keywords": ["finch", "plugin", "api"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puterjam/finch.git"
+  }
+}
