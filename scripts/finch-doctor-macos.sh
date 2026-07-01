@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 set -u
 
 FIX=0
@@ -41,7 +41,7 @@ done
 expand_path() {
   local p="$1"
   if [[ "$p" == "~" ]]; then echo "$HOME"; return; fi
-  if [[ "$p" == ~/* ]]; then echo "$HOME/${p#~/}"; return; fi
+  if [[ "$p" == "~/"* ]]; then echo "$HOME/${p#~/}"; return; fi
   echo "$p"
 }
 
@@ -230,7 +230,7 @@ exec 2>&1
   echo ""
   echo "Summary: errors=$ERRORS warnings=$WARNINGS fixes=$FIXES"
   if [[ "$FIX" != "1" && $((ERRORS + WARNINGS)) -gt 0 ]]; then
-    echo "Try: /bin/zsh finch-doctor-macos.sh --fix"
+    echo "Try: /bin/bash finch-doctor-macos.sh --fix"
   fi
 }
 
