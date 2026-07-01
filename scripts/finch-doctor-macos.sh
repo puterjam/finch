@@ -48,6 +48,14 @@ expand_path() {
 FINCH_HOME="$(expand_path "$FINCH_HOME")"
 [[ -z "$AGENT_HOME" ]] && AGENT_HOME="$HOME/finchnest"
 AGENT_HOME="$(expand_path "$AGENT_HOME")"
+if [[ -d "$FINCH_HOME/pi" ]]; then
+  CORE_DIR="$FINCH_HOME/pi"
+elif [[ -d "$FINCH_HOME/core" ]]; then
+  CORE_DIR="$FINCH_HOME/core"
+else
+  CORE_DIR="$FINCH_HOME/pi"
+fi
+
 REPORT_DIR="$FINCH_HOME/diagnostics"
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 REPORT_FILE="$REPORT_DIR/startup-doctor-$STAMP.txt"
@@ -177,6 +185,16 @@ EOF
   emit FIX "removed missing projectPath from workspace.json; backup: $backup"
 }
 
+check_optional_json() {
+  local file="$1"
+  local default_content="$2"
+  if [[ -e "$file" ]]; then
+    check_json "$file" "$default_content" 1
+  else
+    emit INFO "$(basename "$file") missing; normal for older Finch versions"
+  fi
+}
+
 check_logs() {
   local logs="$FINCH_HOME/logs"
   if [[ ! -d "$logs" ]]; then
@@ -187,7 +205,7 @@ check_logs() {
   local log_tmp="/tmp/finch-startup-log-$STAMP.txt"
   : > "$log_tmp"
   find "$logs" -name '*.jsonl' -type f -print 2>/dev/null | sort | tail -3 | while read -r file; do
-    tail -300 "$file" | grep -E 'bootstrap\.get|workspace\.get|app\.ready|plugins|mcp' >> "$log_tmp" || true
+    tail -300 "$file" | grep -E 'bootstrap\.get|workspace\.get|app\.ready' >> "$log_tmp" || true
   done
   tail -20 "$log_tmp" || true
   rm -f "$log_tmp"
@@ -201,19 +219,20 @@ exec 2>&1
   echo "=============================================="
   echo "finchHome: $FINCH_HOME"
   echo "agentHome: $AGENT_HOME"
+  echo "coreDir: $CORE_DIR"
   echo "fix: $([[ "$FIX" == "1" ]] && echo enabled || echo disabled)"
   echo ""
 
   ensure_dir "$FINCH_HOME" "Finch data directory"
-  ensure_dir "$FINCH_HOME/pi" "Agent core directory"
-  ensure_dir "$FINCH_HOME/pi/sessions" "session directory"
-  ensure_dir "$FINCH_HOME/pi/tmp" "tmp directory"
+  ensure_dir "$CORE_DIR" "Agent core directory"
+  ensure_dir "$CORE_DIR/sessions" "session directory"
+  ensure_dir "$CORE_DIR/tmp" "tmp directory"
 
   check_json "$FINCH_HOME/workspace.json" '{"recentProjects":[]}'
   check_json "$FINCH_HOME/models.json" '{"providers":[]}'
   check_json "$FINCH_HOME/spaces.json" '{"version":2,"spaces":[],"threads":[]}'
   check_json "$FINCH_HOME/skills.json" '{"disabled":[]}'
-  check_json "$FINCH_HOME/plugins.json" '{"enabled":[],"plugins":{}}'
+  check_optional_json "$FINCH_HOME/plugins.json" '{"enabled":[],"plugins":{}}'
   check_json "$FINCH_HOME/log-settings.json" '{"enabled":false,"level":"basic"}' 1
 
   remove_project_path_if_missing
